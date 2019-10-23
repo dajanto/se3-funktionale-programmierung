@@ -3,20 +3,17 @@
 ; 1.1 Bogenmaß und Grad
 (define (degrees->radians degrees)
   ; Gradzahlen -> Bogenmaß
-  ; TODO 1° × π/180 = 0,01745 rad
-  degrees
+  (* degrees (/ pi 180))
   )
 
 (define (radians->degrees radians)
   ; Bogenmaß -> Gradzahl
-  ; TODO 1 rad × 180/π = 57,296°
-  radians
-  
+  (* radians (/ 180 pi))
   )
 
 ; 1.2 Umkehrfunktion
-(define (my-acos cos)
- ; atan: tangens t -> winkel alpha
- ; TODO cos to tan und atan to alpha
-  cos
+(define (my-acos x)
+  (define y (degrees->radians x)) 
+  (define newTan (/ (sin y) (cos y)))
+  ;(radians->degrees (atan newTan))
   )
