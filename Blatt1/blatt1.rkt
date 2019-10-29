@@ -29,9 +29,12 @@
   )
 
 ; 2.1 Großkreisentfernung
-(define (distanzAB a b)
-  a
+; Formel: cos dg = sin breite a * sin breite b +  cos breite a * cos breite b * cos Diff Länge
+; TODO
+(define (distanzAB breiteA breiteB laengeA laengeB)
+  (* (sin breiteA) (sin breiteB) (cos laengeA) (cos laengeB))
   )
+
 
 ; Oslo->Hongkong
 ; San Francisco_>Honolulu
