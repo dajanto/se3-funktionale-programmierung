@@ -53,10 +53,10 @@
 
   ; 2.3 Himmelsrichtungen
 
-  ; Bereiche sind immer 22,5 grad (360/16)
+  ; Bereiche sind immer 22,5 Grad (360/16)
 (define (Grad->Himmelsrichtung grad)
   (cond
-        [(<= grad 11.25) 'N]
+        [(and (>= grad 0) (<= grad 11.25)) 'N]
         [(<= grad 33.75) 'NNO]
         [(<= grad 56.25) 'NO]
         [(<= grad 78.75) 'ONO]
@@ -75,8 +75,8 @@
         [(and(> grad 348.75)(<= grad 360.0))'N]
         [else "ERROR"]))
 
-; HR->grad, eingabe muss ein Symbol sein
-(define (Himmelsrichtung->grad HR)
+; HR->Grad, Eingabe muss ein Symbol sein
+(define (Himmelsrichtung->Grad HR)
   (cond [(symbol=? HR 'N ) 0.0]
         [(symbol=? HR 'NNO ) 22.5]
         [(symbol=? HR 'NO ) 45.0]
