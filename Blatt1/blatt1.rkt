@@ -29,17 +29,26 @@
   )
 
 ; 2.1 Großkreisentfernung
-; Formel: cos dg = sin breite a * sin breite b +  cos breite a * cos breite b * cos Diff Länge
-; TODO
 (define (distanzAB breiteA breiteB laengeA laengeB)
-  (* (sin breiteA) (sin breiteB) (cos laengeA) (cos laengeB))
-  )
+  ; TODO Stil
+  (define z (+ (* (sin (degrees->radians breiteA)) (sin (degrees->radians breiteB)))
+               (* (cos (degrees->radians breiteA)) (cos (degrees->radians breiteB)) (cos (- (degrees->radians laengeA) (degrees->radians laengeB))))))
+    (nm->km
+       (* 60 (radians->degrees (my-acos z))))
+    )
 
+  ; Oslo->Hongkong
+  ; (distanzAB 59.93 22.20 10.75 114.10)
+  ; 8589.41
 
-; Oslo->Hongkong
-; San Francisco_>Honolulu
-; Osterinsel->Lima
+  ; San Francisco->Honolulu
+  ; (distanzAB 37.75 21.32 -122.45 -157.83)
+  ; 3844.68
 
-; 2.2 Anfangskurs
+  ; Osterinsel -> Lima
+  ; (distanzAB -27.1 -12.1 -109.4 -77.05)
+  ; 3757.62
 
-; 2.3 Himmelsrichtungen
+  ; 2.2 Anfangskurs
+
+  ; 2.3 Himmelsrichtungen
