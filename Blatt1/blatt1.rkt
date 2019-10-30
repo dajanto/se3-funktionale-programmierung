@@ -13,11 +13,11 @@
 
 ; 1.2 Umkehrfunktion
 ; TODO Nicht alle Results stimmen
-(define (my-acos cosinus)
-  ; cosinus (degrees) zu radians
-  (define cosinusRadians (degrees->radians cosinus)) 
+(define (my-acos cosinusRadians)
   ; tangens berechnen
-  (define tangensRadians (/ (sin cosinusRadians) (cos cosinusRadians)))
+  (define tangensRadians (/ (sqrt (- 1
+                                     (sqr cosinusRadians)))
+                            cosinusRadians))
   ; tangens an atan übergeben und somit acos erhalten
   (atan tangensRadians)
   )
