@@ -1,0 +1,34 @@
+Aufgabe 1
+---------
+
+Auswertung der Ausdrücke: 
+
+1) Das Aufrufen von wuff führt dazu, dass das Symbol 'Flocki ausgegeben wird (weil wuff als Funktion mit diesem Verhalten definiert ist)
+
+2) Das Aufrufen von Hund führt ebenfalls zur Ausgabe von dem Symbol 'Flocki (da hier wuff nicht als Symbol definiert ist, sondern als Funktionsaufruf)
+
+3) Das Auffrufen von Wolf führt zur Ausgabe des Symbols 'wuff
+
+4) Durch das Aufrufen von der vordefinierten Funktion quote wird das übergebene Element zu einem Symbol gemacht (Ausgabe = 'Hund)
+
+5) Durch das Aufrufen der vordefinierten Funtkion eval, wird das Apostroph vor 'wuff eliminiert und wuff ist wieder ein Funktionsaufruf (Ausgabe = 'Flocki)
+
+6) Das Aufrufen von (eval Hund) führt zu einem Compiler Error. eval folgt vermutlich so lange den Funktionsaufrufen, bis es ein Apostroph gefunden hat, was eliminiert werden kann. 
+   Bei 'Flocki wird das Apostroph weggenommen, da Flocki als Funktion nicht definiert ist, gibt es den Error. 
+
+7) Das Aufrufen von (eval 'Wolf) führt zur Ausgabe 'wuff
+
+8) Man würde vielleicht erwarten, dass 'Zaphod ausgegeben wird. Allerdings werden erst Werte abgespeichert und dann die Ausdrücke ausgewertet
+
+9) cdddr führt dazu, dass 3 mal cdr rekursiv aufgerufen wird. Dadurch wird im Endeffekt das zweite Element des Paares (3, wuff Hund) ausgegeben nämlich '(wuff Hund)
+
+10) Erst wird cons ausgeführt, das führt dazu, dass ein Paar (Hund . wuff) erstellt wird. cdr wählt das zweite Element des Paars aus und führt die Funktion wuff aus. Ausgabe='Flocki)
+
+11) Im Prinzip passiert das gleiche wie bei 10) mit dem Unterschied, dass das Ergebnis als Liste ausgegeben wird
+
+12) Die Wurzel von 1/4 ist 1/2 
+
+13) eval führt hier dazu, dass die Funktion (welcherNameGilftWo 'Wolf 'Hund) ausgeführt wird, dabei kommt 'Wolf raus (siehe 8) )
+
+14) Auch hier wird die Funktion welcherNameGiltWo ausgeführt. Allerdings führt das eval hier dazu, dass Wolf ebenfalls als Funktion aufgerufen wird und damit ist das erste Argument für 
+    welcherNameGilftWo = 'wuff 
