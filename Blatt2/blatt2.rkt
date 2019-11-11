@@ -12,18 +12,18 @@
 (define xs3 (list wuff Hund))
 (define xs2 (cons Hund wuff))
 
-; Aufgabe 1
+; Aufgabe 1 Symbole und Werte, Umgebungen
 ; Siehe .txt
 
-; Aufgabe 2
+; Aufgabe 2 Rechnen mit exakten Zahlen
 
-; 2.1
+; 2.1 Die Fakultät einer Zahl
 
-; 2.2
+; 2.2 Potenzen von Rationalzahlen
 
-; 2.3
+; 2.3 Die Eulerzahl
 
-; 2.4
+; 2.4 PI
 
-; Aufgabe 3
+; Aufgabe 3 Typprädikate
 
