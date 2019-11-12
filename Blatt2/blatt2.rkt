@@ -17,10 +17,22 @@
 
 ; Aufgabe 2 Rechnen mit exakten Zahlen
 
-; 2.1 Die Fakultät einer Zahl
+; 2.1 Die Fakultät einer Zah
+
+(define factorial
+  (lambda (n)
+    (cond
+      ((= n 0) 1)
+      ((> n 0) (* n (factorial(- n 1)))))))
 
 ; 2.2 Potenzen von Rationalzahlen
 
+(define (power r n)
+  (cond
+    ((= n 0) 1)
+    ((odd? n) (* r (expt r (- n 1))))
+    ((even? n) (sqr (expt r (/ n 2))))
+    ))
 ; 2.3 Die Eulerzahl
 
 ; 2.4 PI
