@@ -51,8 +51,8 @@
 ; 2.4 PI
 
 (define (piCalc iterations sum) 
-  ; pi = 4(1 - 1/3 + 1/5 - 1/7 + ... )
-  
+  ; pi = 4(1 - 1/3 + 1/5 - 1/7 + ...)
+  iterations
   )
 
 
