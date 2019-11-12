@@ -50,11 +50,10 @@
 
 ; 2.4 PI
 
-(define (piCalc n) 
-  ; pi = (4/1) - (4 / 3) - (4 / 5) - (4 / 7) ...		
-
+(define (piCalc iterations sum) 
+  ; pi = 4(1 - 1/3 + 1/5 - 1/7 + ... )
+  
   )
-
 
 
 ; Aufgabe 3 Typprädikate
