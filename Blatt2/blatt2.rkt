@@ -23,33 +23,40 @@
   (cond
     [(= n 0) 1]
     [(> n 0) (* n 
-                (factorial(- n 1)))])
+                (factorial(- n 1)))]))
 
-  ; 2.2 Potenzen von Rationalzahlen
+; 2.2 Potenzen von Rationalzahlen
 
-  (define (power r n)
-    (cond
-      [(= n 0) 1]
-      [(even? n) (sqr (power r (/ n 2)))]
-      [(odd? n) (* r 
-                   (power r (- n 1)))]))
+(define (power r n)
+  (cond
+    [(= n 0) 1]
+    [(even? n) (sqr (power r (/ n 2)))]
+    [(odd? n) (* r 
+                 (power r (- n 1)))]))
 
 
-  ; 2.3 Die Eulerzahl
+; 2.3 Die Eulerzahl
 
-  ; EINGABE MUSS X = 0 SEIN!
-  ; Laufzeit: ~5s
-  ; Ergebniss: ~2,5961
+; EINGABE MUSS X = 0 SEIN!
+; Laufzeit: ~5s
+; Ergebniss: ~2,5961
 
-  (define (euler x)
-    (cond
-      [(< (/ 1 (factorial x)) (/ 1 (power 10 1000))) 0]
-      [(>= (/ 1 (factorial x)) (/ 1 (power 10 1000))) (* (power 10 1001) 
-                                                         (+ (/ 1 (factorial x)) 
-                                                            (euler(+ x 1))))]))
+(define (euler x)
+  (cond
+    [(< (/ 1 (factorial x)) (/ 1 (power 10 1000))) 0]
+    [(>= (/ 1 (factorial x)) (/ 1 (power 10 1000))) (* (power 10 1001) 
+                                                       (+ (/ 1 (factorial x)) 
+                                                          (euler(+ x 1))))]))
 
-  ; 2.4 PI
+; 2.4 PI
 
-  ; Aufgabe 3 Typprädikate
+(define (piCalc n) 
+  ; pi = (4/1) - (4 / 3) - (4 / 5) - (4 / 7) ...		
+
+  )
+
+
+
+; Aufgabe 3 Typprädikate
 
   
