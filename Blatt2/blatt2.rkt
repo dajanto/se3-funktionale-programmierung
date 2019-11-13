@@ -23,7 +23,7 @@
   (cond
     [(= n 0) 1]
     [(> n 0) (* n 
-                (factorial(- n 1)))]))
+                (factorial (- n 1)))]))
 
 ; 2.2 Potenzen von Rationalzahlen
 
@@ -42,26 +42,25 @@
 ; Ergebnis: ~2,5961
 
 
-(define (euler x)
+(define (euler [x 0])
   (cond
     [(< (/ 1 (factorial x)) (/ 1 (power 10 1000))) 0]
-    [(>= (/ 1 (factorial x)) (/ 1 (power 10 1000))) (* (power 10 1001) 
+    [(>= (/ 1 (factorial x)) (/ 1 (power 10 1000))) 
                                                        (+ (/ 1 (factorial x)) 
-                                                          (euler(+ x 1))))]))
+                                                          (euler(+ x 1)))]))
 
 ; 2.4 PI
 
-(define (piCalc iterations z) 
+(define (piCalc [z 1] [v -1])
+  ; z = 1
   ; pi = 4(1 - 1/3 + 1/5 - 1/7 + ...)
   ; TODO
   (cond
-    [(> iterations 0) (* 4
-                         (- 1
-                            (/ 1 (piCalc(- iterations 1) (+ z 2)))))]
+    [(>= z 10000) 0]
+    [(< z 10000) (+ (/ 1 z) (* v (piCalc(+ z 2) (* v -1))))]
                       
     )
   )
-	
 
 
 ; Aufgabe 3 Typprädikate
@@ -70,8 +69,8 @@
 (define (typ-of eingabe)
   (cond
     [(boolean? eingabe) 'boolean]
-    [(pair? eingabe) 'pair]
     [(list? eingabe) 'list]
+    [(pair? eingabe) 'pair]
     [(string? eingabe) 'string]
     [(vector? eingabe) 'vector]
     [(char? eingabe) 'char]
