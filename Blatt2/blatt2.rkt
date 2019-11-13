@@ -48,4 +48,19 @@
 
 
 ; Aufgabe 3 Typprädikate
+; typ-of Funktion
+; Prädikate muessen noch eingegeben werden 
+(define (typ-of eingabe)
+(cond
+[(boolean? eingabe) 'boolean]
+[(pair? eingabe) 'pair]
+[(list? eingabe) 'list]
+[(string? eingabe) 'string]
+[(vector? eingabe) 'vecotr]
+[(char? eingabe) 'char]
+[(number? eingabe) 'number]
+[(procedure? eingabe) 'procedure]
+[(symbol? eingabe) 'symbol]))
+
+
 
