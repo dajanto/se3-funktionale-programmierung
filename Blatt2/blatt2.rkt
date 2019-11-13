@@ -39,7 +39,8 @@
 
 ; EINGABE MUSS X = 0 SEIN!
 ; Laufzeit: ~5s
-; Ergebniss: ~2,5961
+; Ergebnis: ~2,5961
+
 
 (define (euler x)
   (cond
@@ -50,26 +51,33 @@
 
 ; 2.4 PI
 
-(define (piCalc iterations sum) 
+(define (piCalc iterations z) 
   ; pi = 4(1 - 1/3 + 1/5 - 1/7 + ...)
-  iterations
+  ; TODO
+  (cond
+    [(> iterations 0) (* 4
+                         (- 1
+                            (/ 1 (piCalc(- iterations 1) (+ z 2)))))]
+                      
+    )
   )
+	
 
 
 ; Aufgabe 3 Typprädikate
 ; typ-of Funktion
-; Prädikate muessen noch eingegeben werden 
+; Prädikate müssen noch eingegeben werden 
 (define (typ-of eingabe)
-(cond
-[(boolean? eingabe) 'boolean]
-[(pair? eingabe) 'pair]
-[(list? eingabe) 'list]
-[(string? eingabe) 'string]
-[(vector? eingabe) 'vecotr]
-[(char? eingabe) 'char]
-[(number? eingabe) 'number]
-[(procedure? eingabe) 'procedure]
-[(symbol? eingabe) 'symbol]))
+  (cond
+    [(boolean? eingabe) 'boolean]
+    [(pair? eingabe) 'pair]
+    [(list? eingabe) 'list]
+    [(string? eingabe) 'string]
+    [(vector? eingabe) 'vector]
+    [(char? eingabe) 'char]
+    [(number? eingabe) 'number]
+    [(procedure? eingabe) 'procedure]
+    [(symbol? eingabe) 'symbol]))
 
 
 
