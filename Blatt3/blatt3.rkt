@@ -3,6 +3,16 @@
 ; Aufgabe 1 Internationale Buchstabiertafel 
 
 ; 1.1 Datenstruktur 
+(define buchstabiertafel (hash
+	"A" 'Alfa	
+	"B" 'Bravo	
+	"C" 'Charlie	
+	"D" 'Delta)	
+	)
+
+; Aufruf: (hash-ref buchstabiertafel  "apple")
+
+
 
 ; 1.2 Codierungsfunktion
 
