@@ -23,18 +23,29 @@
   )
 
 ; 1.3 Zusatz
-(define (klein->groß buchstabe)
+(define (alleBuchstabenAbbilden buchstabe)
+  
+  (define charInt (char->integer buchstabe))
+  
   (cond
-    [(and (>= (char->integer buchstabe) 65)
-          (<= (char->integer buchstabe) 90)) (buchstabeAbbilden buchstabe)]
-    [(and (>= (char->integer buchstabe) 97)
-          (<= (char->integer buchstabe) 122)) (buchstabeAbbilden (integer->char (-(char->integer buchstabe) 32)))]
-    [(= (char->integer buchstabe) 44) (buchstabeAbbilden buchstabe)]
-    [(= (char->integer buchstabe) 46) (buchstabeAbbilden buchstabe)]))
+    [(and (>= charInt 65)
+          (<= charInt 90)) (buchstabeAbbilden buchstabe)]
+    [(and (>= charInt 97)
+          (<= charInt 122)) (buchstabeAbbilden (integer->char (-(char->integer buchstabe) 32)))]
+    [(= charInt 44) (buchstabeAbbilden buchstabe)]
+    [(= charInt 46) (buchstabeAbbilden buchstabe)]))
 
 
 ; 1.4 Buchstabieren 
+(define (buchstabieren string)
 
+  (define liste (string->list string))
+ 
+  (cond
+    [(empty? liste)]
+    [else (list (alleBuchstabenAbbilden (car liste)))
+          (buchstabieren (list->string(cdr liste)))])
+  )
 
 
 ; Aufgabe 2 Internationales Flaggenalphabet
