@@ -10,6 +10,11 @@
 	"D" 'Delta)	
 	)
 
+; Erklärung:
+; 
+; 
+; 
+
 ; Aufruf: (hash-ref buchstabiertafel  "apple")
 
 
