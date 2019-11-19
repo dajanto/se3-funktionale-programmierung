@@ -7,27 +7,48 @@
                           #\A 'Alfa	
                           #\B 'Bravo	
                           #\C 'Charlie	
-                          #\D 'Delta)	
-  )
+                          #\D 'Delta
+                          #\, 'Decimal
+                          #\. 'Stop
+                          ))
 
-; Erklärung:
-; 
-; 
-; 
+  ; Erklärung:
+  ; 
+  ; 
+  ; 
 
-; 1.2 Codierungsfunktion
-(define (buchstabeAbbilden buchstabe)
-  (hash-ref buchstabiertafel buchstabe)
-  )
+  ; 1.2 Codierungsfunktion
+  (define (buchstabeAbbilden buchstabe)
+    (hash-ref buchstabiertafel buchstabe)
+    )
 
-; 1.4 Buchstabieren 
+  ; 1.3 Zusatz
+  (define (klein->groß buchstabe)
+    (cond
+      [(and (>= (char->integer buchstabe) 65)
+            (<= (char->integer buchstabe) 90)) (buchstabeAbbilden buchstabe)]
+      [(and (>= (char->integer buchstabe) 97)
+            (<= (char->integer buchstabe) 122)) "kleinbuchstabe"]
+      [(= (char->integer buchstabe) 44) (buchstabeAbbilden buchstabe)]
+      [(= (char->integer buchstabe) 46) (buchstabeAbbilden buchstabe)]
+
+      ))
+      
+
+    
+  ; [(and (>= (char->integer buchstabe) 97)
+  ;  (<= (char->integer buchstabe) 112)) "kleinbuchstabe"]))
+
+
+  ; 1.4 Buchstabieren 
 
 
 
-; Aufgabe 2 Internationales Flaggenalphabet
+  ; Aufgabe 2 Internationales Flaggenalphabet
 
-; 2.1 Datenstruktur 
+  ; 2.1 Datenstruktur 
 
-; 2.2 Codierungsfunktion
+  ; 2.2 Codierungsfunktion
 
-; 2.3 Buchstabieren 
+  ; 2.3 Buchstabieren 
+  
