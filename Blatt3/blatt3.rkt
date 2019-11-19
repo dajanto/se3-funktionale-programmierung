@@ -28,7 +28,7 @@
       [(and (>= (char->integer buchstabe) 65)
             (<= (char->integer buchstabe) 90)) (buchstabeAbbilden buchstabe)]
       [(and (>= (char->integer buchstabe) 97)
-            (<= (char->integer buchstabe) 122)) "kleinbuchstabe"]
+            (<= (char->integer buchstabe) 122)) (buchstabeAbbilden (integer->char (-(char->integer buchstabe) 32)))]
       [(= (char->integer buchstabe) 44) (buchstabeAbbilden buchstabe)]
       [(= (char->integer buchstabe) 46) (buchstabeAbbilden buchstabe)]
 
