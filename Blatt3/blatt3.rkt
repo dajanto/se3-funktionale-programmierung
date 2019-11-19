@@ -33,11 +33,6 @@
       [(= (char->integer buchstabe) 46) (buchstabeAbbilden buchstabe)]
 
       ))
-      
-
-    
-  ; [(and (>= (char->integer buchstabe) 97)
-  ;  (<= (char->integer buchstabe) 112)) "kleinbuchstabe"]))
 
 
   ; 1.4 Buchstabieren 
