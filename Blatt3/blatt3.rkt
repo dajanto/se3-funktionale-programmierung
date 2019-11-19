@@ -4,24 +4,25 @@
 
 ; 1.1 Datenstruktur 
 (define buchstabiertafel (hash
-	"A" 'Alfa	
-	"B" 'Bravo	
-	"C" 'Charlie	
-	"D" 'Delta)	
-	)
+                          "A" 'Alfa	
+                          "B" 'Bravo	
+                          "C" 'Charlie	
+                          "D" 'Delta)	
+  )
 
 ; Erklärung:
 ; 
 ; 
 ; 
 
-; Aufruf: (hash-ref buchstabiertafel  "apple")
-
-
-
 ; 1.2 Codierungsfunktion
+(define (buchstabeAbbilden buchstabe)
+  (hash-ref buchstabiertafel buchstabe)
+  )
 
 ; 1.4 Buchstabieren 
+
+
 
 ; Aufgabe 2 Internationales Flaggenalphabet
 
