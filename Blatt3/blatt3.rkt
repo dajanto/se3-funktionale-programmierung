@@ -4,10 +4,10 @@
 
 ; 1.1 Datenstruktur 
 (define buchstabiertafel (hash
-                          "A" 'Alfa	
-                          "B" 'Bravo	
-                          "C" 'Charlie	
-                          "D" 'Delta)	
+                          #\A 'Alfa	
+                          #\B 'Bravo	
+                          #\C 'Charlie	
+                          #\D 'Delta)	
   )
 
 ; Erklärung:
