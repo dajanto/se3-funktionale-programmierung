@@ -41,11 +41,10 @@
 (define (buchstabieren string)
 
   (define liste (string->list string))
- 
   (cond
-    [(empty? liste)]
-    [else (list (alleBuchstabenAbbilden (car liste)))
-          (buchstabieren (list->string(cdr liste)))])
+    [(empty? liste) '()]
+    [else  (write (alleBuchstabenAbbilden(car liste)))
+           (buchstabieren (list->string(cdr liste)))])
   )
 
 
