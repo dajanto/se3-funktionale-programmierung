@@ -54,7 +54,8 @@
 
 ; 1.2 Codierungsfunktion
 (define (buchstabeAbbilden buchstabe)
-  (hash-ref buchstabiertafel buchstabe))
+  (hash-ref buchstabiertafel buchstabe)
+  )
 
 ; 1.3 Zusatz
 (define (alleBuchstabenAbbilden buchstabe)
@@ -68,8 +69,7 @@
           (<= charInt 122)) (buchstabeAbbilden (integer->char (- (char->integer buchstabe)
                                                                  32)))]
     [(= charInt 44) (buchstabeAbbilden buchstabe)]
-    [(= charInt 46) (buchstabeAbbilden buchstabe)]
-    [else buchstabe]))
+    [(= charInt 46) (buchstabeAbbilden buchstabe)]))
 
 
 ; 1.4 Buchstabieren 
@@ -77,58 +77,51 @@
 
   (define liste (string->list string))
   (cond
-    [(empty? liste) (fprintf (current-output-port)" ")]
-    [else  (write (buchstabeAbbilden(car liste)))
-           (fprintf (current-output-port)" ")
+    [(empty? liste) '()]
+    [else  (write (alleBuchstabenAbbilden(car liste)))
            (buchstabieren (list->string(cdr liste)))])
   )
-
-;(if (empty? list)
-;    '()
-;    (cons (+ 1 (car list)) (function (cdr list))))       <---- die bessere Lösung
-;                                                         <---- cons verbindet die beiden Teile der Liste die man getrennt hat
-
 
 ;Aufgabe 2 Internationales Flaggenalphabet
 
 ; 2.1 Datenstruktur
 (define Flaggenalfabet(hash
-         #\A A
-         #\B B
-         #\C C
-         #\D D
-         #\E E
-         #\F F
-         #\G G
-         #\H H
-         #\I I
-         #\J J
-         #\K K
-         #\L L
-         #\M M
-         #\N N
-         #\O O
-         #\P P
-         #\Q Q
-         #\R R
-         #\S S
-         #\T T
-         #\U U
-         #\V V
-         #\W W
-         #\X X
-         #\Y Y
-         #\Z Z
-         #\0 Z0
-         #\1 Z1
-         #\2 Z2
-         #\3 Z3
-         #\4 Z4
-         #\5 Z5
-         #\6 Z6
-         #\7 Z7
-         #\8 Z8
-         #\9 Z9)
+         "A" A
+         "B" B
+         "C" C
+         "D" D
+         "E" E
+         "F" F
+         "G" G
+         "H" H
+         "I" I
+         "J" J
+         "K" K
+         "L" L
+         "M" M
+         "N" N
+         "O" O
+         "P" P
+         "Q" Q
+         "R" R
+         "S" S
+         "T" T
+         "U" U
+         "V" V
+         "W" W
+         "X" X
+         "Y" Y
+         "Z" Z
+         "0" Z0
+         "1" Z1
+         "2" Z2
+         "3" Z3
+         "4" Z4
+         "5" Z5
+         "6" Z6
+         "7" Z7
+         "8" Z8
+         "9" Z9)
   )
 ; 2.2 Codierungsfunktion
 
@@ -137,12 +130,5 @@
 
 ; 2.3 Buchstabieren
 
-(define (buchstabieren1 string)
-
-  (define liste (string->list string))
-  (cond
-    [(empty? liste) (fprintf (current-output-port)" ")]
-    [else  (write (FlaggenAbbilden(car liste)))
-           (fprintf (current-output-port)" ")
-           (buchstabieren1 (list->string(cdr liste)))])
-  )
+(define (buchstabieren2 str)
+  (for-each Codierungsfunktion (string->list str)))
