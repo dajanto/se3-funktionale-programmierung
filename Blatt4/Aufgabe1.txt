@@ -1,0 +1,51 @@
+Ausdruck 1
+----------
+
+Der Ausdruck ergibt: 0
+->innerste Klammer ergibt -3 
+->(min 2 -3) ergibt -3 
+->(max 0 -3) ergibt 0
+
+Ausdruck 2
+----------
+
+Der Ausdruck ergibt: '(+ (- 2 13) 2)
+->In diesem Fall wird die Symbolfunktion vorgezogen, obwohl sie ganz außen im Ausdruck ist. 
+  Daher werden dann die inneren Ausdrücke nicht mehr ausgeführt, denn es sind dann keine mathematischen Ausdrücke mehr
+
+Ausdruck 3
+----------
+
+Der Ausdruck ergibt: 'Jahre
+-> cadr (also (car(cdr(x))) ) wird vorgezogen und am Ende bleibt Jahr für die Symbolfunktion übrig
+
+Ausdruck 4
+----------
+
+Der Ausdruck ergibt: '()
+-> nach cdr bleibt (das Weihnachtsfest) übrig und da es kein zweites Element als Paar gibt, gibt der zweite Aufruf von cdr 
+   eine leere Liste zurück,
+
+ Ausdruck 5
+ ----------
+
+ Der Ausdruck ergibt: '(Listen ganz einfach und)
+ -> 
+
+ Ausdruck 6
+ ----------
+ Der Ausdruck ergibt: '(Paare . auch)
+ -> die Funktion cons macht aus zwei separaten Symbolen ein einziges Symbol als Paar
+
+Ausdruck 7
+----------
+
+Der Ausdruck ergibt: #t 
+-> eine Liste aus Symbolen und eine "Symbolliste" sind gleich
+-> bei Paaren ist mit equal? die Gleichheit rekursiv definiert
+
+Ausdruck 8
+----------
+
+Der Ausdruck ergibt: #f
+-> im Gegensatz zu equal? prüft eq? ob zwei Variablen auf das selbe Objekt referenzieren 
