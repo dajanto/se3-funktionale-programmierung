@@ -18,18 +18,19 @@
 ; 2.1
 ; Backus-Naur-Form
 
-;1 <Überschrift> ::= <Notzeichen> <Notzeichen> <Notzeichen> "DELTA ECHO" <Schiffsname> <Schiffsname> <Schiffsname> <Rufzeichen> <NotzeichenEnde>
-;2 <Standortangabe> ::= [a-zA-Z]
-;3 <Art des Unfalls> ::= [a-zA-Z]
-;4 <Angaben zur Hilfeleistung> ::= [a-zA-Z]
-;5 <Peilzeichen> ::= (Sendetaste für 10-15 Sekunden drücken)
-;6 <Unterschrift> ::= <Schiffsname> <RufzeichenBuchstabiert>
+;0 <Seenot> ::= <Überschrift> <Standortangabe> <Art des Unfalls> <Angaben zur Hilfeleistung> <Peilzeichen> <Unterschrift> <OVER>
+;1 <Überschrift> ::= <Notzeichen> <Notzeichen> <Notzeichen> "DELTA ECHO" 3 * <Schiffsname> <Rufzeichen> <NotzeichenEnde>
+;2 <Standortangabe> ::= <Text_mit_Zahlen>
+;3 <Art des Unfalls> ::= <Text>
+;4 <Angaben zur Hilfeleistung> ::= <Text>
+;5 <Peilzeichen> ::= "--"
+;6 <Unterschrift> ::= <Schiffsname> <Rufzeichen>
 ;7 <OVER> ::= "OVER"
 
 ; Auflösungen
 ; <Notzeichen> ::= "MAYDAY"
-; <NotzeichenEnde> ::= "MAYDAY" <Schiffsname> <SchiffsnameBuchstabiert> <RufzeichenBuchstabiert>
-; <Schiffsname> ::= [a-zA-Z]
+; <NotzeichenEnde> ::= "MAYDAY" <Schiffsname> <SchiffsnameBuchstabiert> <Rufzeichen>
+; <Schiffsname> ::= <Wort>
 ; <SchiffsnameBuchstabiert> ::= [Alpha,Bravo,Charlie,...,Zulu]
 ; <Rufzeichen> ::= [Alpha,Bravo,Charlie,...,Zulu] [Alpha,Bravo,Charlie,...,Zulu] [Alpha,Bravo,Charlie,...,Zulu] [Alpha,Bravo,Charlie,...,Zulu]
 ; <RufzeichenBuchstabiert> ::= [Alpha,Bravo,Charlie,...,Zulu]
