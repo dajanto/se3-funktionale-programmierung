@@ -34,24 +34,41 @@
 
 ; Implementation und Erprobung
 
+; Alle möglichen Musterungen
 (define musterung (list 'sterne 'punkte 'streifen)
 )
 
+; Alle möglichen Flügelfarben
 (define fluegelfarbe (list 'red 'gelb 'gruen 'blau)
 )
 
+; Alle möglichen Fühlerformen
 (define fuehlerform (list 'gerade 'gekruemmt 'geschweift)
 )
 
+; Alle möglichen Flügelformen
 (define fluegelform (list 'rhombisch 'elliptisch 'hexagonal)
 )
 
+; Generiere <kinderanzahl> Kinder auf Basis der Elternmerkmale
 (define (mendeln merkmalA merkmalB kinderanzahl)
   (list merkmalA)
   )
 
-(define zeigeSchmetterling
-  (show-butterfly 'red 'dots 'straight 'hexagon)
+
+; Prüfe, ob Merkmal a dominanter b
+(define (dominanteMerkmalePruefen a b)
+  1)
+
+
+; Wähle rezessive Mermake zufällig aus
+(define (waehleRezessiveMerkmale)
+  1
+)
+
+; Stelle Eltern und gemendelte Kinder dar
+(define zeigeFamilie 
+  1
   )
 
 ; Testaufrufe
