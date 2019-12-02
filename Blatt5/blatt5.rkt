@@ -26,7 +26,7 @@
 ; Benötigte Funktionen
 ; Funktion zur Generierung der Kinder ("mendeln")
 ; Funktion zur Darstellung 
-; Funktion zur Dominanzüberprüfung eines Merkmals
+; Funktion zur Dominanzüberprüfung zweier Merkmale
 ; Testaufrufe mit vorhandenen Funktionen
 
 ; Datenstrukturen
@@ -47,7 +47,11 @@
 )
 
 (define (mendeln merkmalA merkmalB kinderanzahl)
-  merkmalA
+  (list merkmalA)
+  )
+
+(define zeigeSchmetterling
+  (show-butterfly 'red 'dots 'straight 'hexagon)
   )
 
 ; Testaufrufe
