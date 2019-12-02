@@ -21,11 +21,15 @@
 ; Ziel
 ; Bei Angabe von zwei dominanten Merkmalen x Kinder erzeugen und beschreiben
 ; Rezessive Merkmale werden zufällig, aber in Abhängigkeit der Dominanzregeln ausgewählt 
-; Anzeigen mit (show-butterfly)
+
+; Vorliegende Teilprobleme
+; Entscheidung und Strukrierung dominanter Merkmale
+; Generierung der Kinder auf Basis der Elternmerkmale
 
 ; Benötigte Funktionen
+; Repräsentation aller Merkmale als Datenstruktur
 ; Funktion zur Generierung der Kinder ("mendeln")
-; Funktion zur Darstellung 
+; Funktion zur Darstellung der Familie (Eltern, Kinder)
 ; Funktion zur Dominanzüberprüfung zweier Merkmale
 ; Testaufrufe mit vorhandenen Funktionen
 
