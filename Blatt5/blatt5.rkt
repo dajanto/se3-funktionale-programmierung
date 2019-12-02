@@ -38,20 +38,20 @@
 
 ; Implementation und Erprobung
 
-; Alle möglichen Musterungen
+; Alle möglichen Musterungen sortiert nach Dominanz
 (define musterung (list 'sterne 'punkte 'streifen)
 )
 
-; Alle möglichen Flügelfarben
-(define fluegelfarbe (list 'red 'gelb 'gruen 'blau)
+; Alle möglichen Flügelfarben sortiert nach Dominanz
+(define fluegelfarbe (list 'red 'gruen 'blau 'gelb)
 )
 
-; Alle möglichen Fühlerformen
-(define fuehlerform (list 'gerade 'gekruemmt 'geschweift)
+; Alle möglichen Fühlerformen sortiert nach Dominanz
+(define fuehlerform (list 'gekruemmt 'gerade 'geschweift)
 )
 
-; Alle möglichen Flügelformen
-(define fluegelform (list 'rhombisch 'elliptisch 'hexagonal)
+; Alle möglichen Flügelformen sortiert nach Dominanz
+(define fluegelform (list 'elliptisch 'hexagonal 'rhombisch)
 )
 
 ; Generiere <kinderanzahl> Kinder auf Basis der Elternmerkmale
