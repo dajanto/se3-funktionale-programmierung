@@ -38,46 +38,70 @@
 
 ; Implementation und Erprobung
 
-; Alle möglichen Musterungen sortiert nach Dominanz
-(define musterung (list 'sterne 'punkte 'streifen)
-)
+; Merkmale als Liste von Listen
 
-; Alle möglichen Flügelfarben sortiert nach Dominanz
-(define fluegelfarbe (list 'red 'gruen 'blau 'gelb)
-)
-
-; Alle möglichen Fühlerformen sortiert nach Dominanz
-(define fuehlerform (list 'gekruemmt 'gerade 'geschweift)
-)
-
-; Alle möglichen Flügelformen sortiert nach Dominanz
-(define fluegelform (list 'elliptisch 'hexagonal 'rhombisch)
-)
-
-; Generiere <kinderanzahl> Kinder auf Basis der Elternmerkmale
-(define (mendeln merkmalA merkmalB kinderanzahl)
-  (list merkmalA)
+(define merkmalsListen
+  (list
+    (list 'red 'green 'blue 'yellow )
+    (list 'star 'dots 'stripes )
+    (list 'curly 'straight 'curved )
+    (list 'ellipse 'hexagon 'rhomb )
   )
-
-
-; Prüfe, ob Merkmal a dominanter b
-(define (dominanteMerkmalePruefen a b)
-  1)
-
-
-; Wähle rezessive Mermake zufällig aus
-(define (waehleRezessiveMerkmale)
-  1
 )
 
-; Stelle Eltern und gemendelte Kinder dar
-(define zeigeFamilie 
-  1
+(define (randomPick list)
+  (list-ref list (random (length list))))
+
+(define (first-element list1 list2)
+  (if
+   (empty? list1)
+   '()
+   (if
+    (list? (member (car list1) list2))
+    (car list1)
+    (first-element (cdr list1) list2))))
+
+(define (zeichneMendel mutterDominant vaterDominant)
+  (let*
+      ( [mutterRez (map randomPick (map member mutterDominant merkmalsListen))]
+        [vaterRez (map randomPick (map member vaterDominant merkmalsListen))]
+        [mutterMischen (map randomPick (map list mutterDominant mutterRez))]
+        [vaterMischen (map randomPick (map list vaterDominant vaterRez))]
+        [kind (map first-element merkmalsListen (map list mutterMischen vaterMischen))])
+    (display (show-butterfly (car kind) (cadr kind) (caddr kind) (cadddr kind)))))
+
+(define (mendel mutterDominant vaterDominant n)
+  (zeichneMendel mutterDominant vaterDominant)
+  (if
+   (> n 1)
+   (mendel mutterDominant vaterDominant (sub1 n))
+   (display "\n")
   )
+)
 
-; Testaufrufe
-(show-butterfly 'red 'dots 'straight 'hexagon)
-(show-butterfly 'yellow 'star 'straight 'ellipse)
-(show-butterfly 'blue 'star 'curly 'rhomb)
+(mendel 
+ (list 'red 'star 'curly 'ellipse ) 
+ (list 'red 'star 'curly 'ellipse ) 
+ 2
+)
 
-; Aufgabe 2
+(mendel 
+ (list 'green 'stripes 'curved 'hexagon ) 
+ (list 'green 'stripes 'curved 'hexagon )
+ 3
+)
+
+(mendel 
+ (list 'blue 'stripes 'curved 'hexagon ) 
+ (list 'red 'star 'curly 'ellipse ) 
+ 3
+)
+
+(mendel 
+ (list 'red 'star 'curly 'ellipse ) 
+ (list 'yellow 'dots 'straight 'rhomb )
+ 3
+)
+
+        
+
