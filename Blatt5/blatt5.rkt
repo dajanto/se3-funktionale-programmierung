@@ -36,10 +36,10 @@
 ; Datenstrukturen
 ; Speicherung von Merkmal-Kategorien (Musterung, Flügelfarbe, Fühlerform, Flügelform)
 
-; Implementation und Erprobung
+; Implementation:
+; ------------------------------------------------------------
 
 ; Merkmale als Liste von Listen
-
 (define merkmalsListen
   (list
     (list 'red 'green 'blue 'yellow )
@@ -48,10 +48,12 @@
     (list 'ellipse 'hexagon 'rhomb )
   )
 )
-
+; Zufaellige Auswahl aus einer Liste
 (define (randomPick list)
   (list-ref list (random (length list))))
 
+; Bestimmt Dominanz
+; (first-element '(a b c) '(c b)) -> 'b
 (define (first-element list1 list2)
   (if
    (empty? list1)
@@ -63,13 +65,19 @@
 
 (define (zeichneMendel mutterDominant vaterDominant)
   (let*
-      ( [mutterRez (map randomPick (map member mutterDominant merkmalsListen))]
+      ( ; Zufaellig ein rezessives Eigenschaft von der Mutter auswaehlen
+        [mutterRez (map randomPick (map member mutterDominant merkmalsListen))]
+        ; Zufaellig ein rezessives Eigenschaft vom Vater auswaehlen
         [vaterRez (map randomPick (map member vaterDominant merkmalsListen))]
+        ; Waehle eine Eigenschaft zwischen Dominant und Rezessive aus (von der Mutter)
         [mutterMischen (map randomPick (map list mutterDominant mutterRez))]
+        ; Waehle eine Eigenschaft zwischen Dominant und Rezessive aus (vom Vater)
         [vaterMischen (map randomPick (map list vaterDominant vaterRez))]
+        ; Erstelle Kind basierend auf Mendel-Regeln
         [kind (map first-element merkmalsListen (map list mutterMischen vaterMischen))])
     (display (show-butterfly (car kind) (cadr kind) (caddr kind) (cadddr kind)))))
 
+; Zeichne n Butterflies
 (define (mendel mutterDominant vaterDominant n)
   (zeichneMendel mutterDominant vaterDominant)
   (if
@@ -79,10 +87,12 @@
   )
 )
 
+; Erprobung :
+; ------------------------------------------------------------------------------
 (mendel 
  (list 'red 'star 'curly 'ellipse ) 
  (list 'red 'star 'curly 'ellipse ) 
- 2
+ 100
 )
 
 (mendel 
