@@ -24,20 +24,17 @@
 ( define scene-width 800 )
 ( define scene-height 600 )
 
-; Diese Szene ist der Hintergrund des Bildes
+; Hintergrund des Bildes
 ( define my-scene ( empty-scene scene-width scene-height "darkblue" ) )
 
-; Dieses Rechteck ist auf dem Bild am Ende nicht sichtbar, wird jedoch verwendet
-; um die einzelnen Objekte auf dem Bild zu platzieren.
-( define orientation-canvas ( rectangle scene-width scene-height "solid" ( color 0 0 0 0 ) ) )
+; Wird verwendet um die einzelnen Objekte auf dem Bild zu platzieren.
+( define orientation-scene ( rectangle scene-width scene-height "solid" ( color 0 0 0 0 ) ) )
 
-; Hier wird eine Schneelandschaft erzeugt, die aus mehreren Ellipsen besteht,
-; die mit unterschiedlicher Größe und Schattierung übereinander liegen. *magic*
+; Hier wird eine Schneelandschaft erzeugt, die aus mehreren Ellipsen besteht.
 ( define snow-landscape
    ( underlay
-     ( place-image (ellipse 1500 200 "solid" (color 180 180 180)) 200 600 orientation-canvas )
-    ; ( place-image (ellipse 900 750 "solid" (color 220 220 220)) 600 700 orientation-canvas )
-     ( place-image (ellipse 1600 550 "solid" (color 250 250 250)) 400 800 orientation-canvas )
+     ( place-image (ellipse 1500 200 "solid" (color 180 180 180)) 200 600 orientation-scene )
+     ( place-image (ellipse 1600 550 "solid" (color 250 250 250)) 400 800 orientation-scene )
      )
    )
 
@@ -68,11 +65,11 @@
                    (baum2)
                    (random scene-width)
                    (inexact->exact (* scene-height 0.80))
-                   orientation-canvas ) ]
+                   orientation-scene ) ]
           )
       ( if (zero? x)
            tree2
-           ( underlay ; Bäume übereinander legen
+             ( underlay ; Bäume übereinander legen
              tree2
              ( trees2 (sub1 x) )
              )
@@ -86,11 +83,11 @@
                    (kerze)
                    (random scene-width)
                    (inexact->exact (* scene-height 0.93))
-                   orientation-canvas ) ]
+                   orientation-scene ) ]
           )
       ( if (zero? n)
            kerze2
-           ( underlay ; Bäume übereinander legen
+           ( underlay ;
              kerze2
              ( kerzen2 (sub1 n) )
              )
@@ -98,19 +95,19 @@
       )
    )
 
-( define (sterne2 x)
+( define (sterne2 y)
    ( let (
           [ stern2 ( place-image
                    (stern)
                    (random scene-width)
-                   (random (- scene-height 80))
-                   orientation-canvas ) ]
+                   (random (- scene-height 120))
+                   orientation-scene ) ]
           )
-      ( if (zero? x)
+      ( if (zero? y)
            stern2
-           ( underlay ; Bäume übereinander legen
+           ( underlay 
              stern2
-             ( sterne2 (sub1 x) )
+             ( sterne2 (sub1 y) )
              )
            )
       )
@@ -126,7 +123,7 @@
   ( kerzen2 4))
 
 (define zeigeSterne
-  ( sterne2 10 ))
+  ( sterne2 20 ))
 
 
 
