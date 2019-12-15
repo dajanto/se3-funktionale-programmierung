@@ -43,7 +43,7 @@
                         liste)))
 
 
-; Aufgabe 2.1
+; Aufgabe 2.2.1
 (define spielfeld #(
                     #(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0)
                     #(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0)
@@ -80,7 +80,7 @@
                     ))
 
 
-; Aufgabe 2.2
+; Aufgabe 2.2.2
 (define (zeichne x)
 
   (cond
@@ -98,14 +98,6 @@
   x
   )
 
-; Testkram
-(define (geheListeDurch x liste)
-  (if(equal? (length liste) (- 5 (- x 1)))
-     (car liste)
-     (geheListeDurch x (cdr liste))
-     ))
-
-
 ; Bestimme 3, 5 oder 8 Nachbarn und tue die Werte in einer Liste
 (define (bestimmeNachbarn x y)
 
@@ -119,7 +111,7 @@
          [n8 (gibZelle (+ x 1) (- y 1))])
     (list n1 n2 n3 n4 n5 n6 n7 n8)))
 
-; Aufgabe 2.3
+; Aufgabe 2.2.3
 (define (totOderLebendig x y)
 
   (define anzahlNachbarn (count positive? (bestimmeNachbarn x y)))
@@ -134,11 +126,32 @@
     ))
 
 
-; Aufgabe 2.4
+; Aufgabe 2.2.4
 (define (simulation x)
 
   x
   )
+
+
+; Testkram
+(define spielfeld1 #(#(1 2 3)
+                    #(4 5 6)
+                    #(7 8 9)
+                    ))
+
+;(vector-set! (vector-ref spielfeld1 1) 1 1)
+; ERROR: vector-set!: '#(4 5 6) is not a mutable vector
+
+spielfeld1
+
+(define spielfeld2 '('(1 2 3)
+                    '(4 5 6)
+                    '(7 8 9)
+                    ))
+
+;(list-set (list-ref spielfeld2 1) 1 1)
+;spielfeld2
+
 
 
 ; Spielfeld von Vektoren in Vektor zu Listen in Vektor
