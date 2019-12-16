@@ -44,11 +44,16 @@
 
 
 ; Aufgabe 2.2.1
+
+; Spielfeld-Dimensionen
+(define rows 5)
+(define columns 5)
+
 (define (spielfeldErstellen rows columns)
   (make-vector rows (make-vector columns)
 ))
 
-(define spielfeld (spielfeldErstellen 5 5 ))
+(define spielfeld (spielfeldErstellen rows columns))
 spielfeld
 
 ; Aufgabe 2.2.2
@@ -64,14 +69,15 @@ spielfeld
 
 ; Setzt Zelleninhalt
 (define (setzeZelle x y wert)
-  ; TODO Zweidimensional
-  ; set: vec pos value
-  ; ref: vec pos
-  (vector-set! (vector-ref spielfeld y) x wert)
+
+  ; Erstelle Vector mit Wert an Stelle y und setze an Position x ein
+  (define vectorINJ (make-vector columns))
+  (vector-set! vectorINJ x wert)
+  (vector-set! spielfeld y vectorINJ)
   )
 
 ; Setze im dritten Vektor an vierter Stelle eine 5
-(setzeZelle 3 4 5)
+(setzeZelle 0 2 5)
 
 ; Spielfeld ausgeben
 spielfeld
