@@ -76,7 +76,7 @@ spielfeld
   (vector-set! spielfeld y vectorINJ)
   )
 
-; Setze im dritten Vektor an vierter Stelle eine 5
+; Setze im ersten Vektor an dritter Stelle eine 5
 (setzeZelle 0 2 5)
 
 ; Spielfeld ausgeben
