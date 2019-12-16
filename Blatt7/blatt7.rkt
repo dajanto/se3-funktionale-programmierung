@@ -45,11 +45,12 @@
 
 ; Aufgabe 2.2.1
 ; TODO Zweidimensional
+(define (spielfeldErstellen n)
+  (make-vector n)
+)
+
 (define spielfeld (spielfeldErstellen 9))
 
-(define (spielfeldErstellen n)
-  (make-vector x)
-)
 
 ;(define spielfeld #(
 ;                    #(0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0)
