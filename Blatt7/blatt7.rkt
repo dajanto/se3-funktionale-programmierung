@@ -44,15 +44,16 @@
 ; Aufgabe 2.2.1
 
 ; Spielfeld-Dimensionen
-(define rows 30)
-(define columns 30)
+(define rows 10)
+(define columns 10)
 
 (define (spielfeldErstellen rows columns)
-  (make-vector rows (make-vector columns)
-))
+  ;(make-vector rows (make-vector columns)
+
+(build-vector rows (lambda (y) (make-vector columns 0))))
 
 (define spielfeld (spielfeldErstellen rows columns))
-spielfeld
+;spielfeld
 
 ; Aufgabe 2.2.2
 (define (zeichne x)
@@ -68,16 +69,16 @@ spielfeld
 ; Setzt Zelleninhalt
 (define (setzeZelle x y wert)
 
-  ; Erstelle Vector mit Wert an Stelle y und setze an Position x ein
-  ; TODO Spielfeld-Zeile benutzen, nicht einen neuen erstellen (Werte werden immer überschrieben) 
-  (define vectorINJ (make-vector columns))
-  (vector-set! vectorINJ y wert)
-  (vector-set! spielfeld x vectorINJ)
+  (vector-set! (vector-ref spielfeld x) y wert)
   )
 
 ; Tests
-(setzeZelle 0 0 1)
-(setzeZelle 0 2 1)
+(setzeZelle 1 1 1)
+(setzeZelle 2 1 1)
+(setzeZelle 3 1 1)
+(setzeZelle 0 1 1)
+
+
 
 ; Spielfeld ausgeben
 spielfeld
