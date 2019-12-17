@@ -3,7 +3,6 @@
 (require 2htdp/image)
 (require 2htdp/universe)
 
-
 ; Aufgabe 2.1
 
 ; Allgemein rekursiv
@@ -42,12 +41,11 @@
   
                         liste)))
 
-
 ; Aufgabe 2.2.1
 
 ; Spielfeld-Dimensionen
-(define rows 5)
-(define columns 5)
+(define rows 30)
+(define columns 30)
 
 (define (spielfeldErstellen rows columns)
   (make-vector rows (make-vector columns)
@@ -71,13 +69,15 @@ spielfeld
 (define (setzeZelle x y wert)
 
   ; Erstelle Vector mit Wert an Stelle y und setze an Position x ein
+  ; TODO Spielfeld-Zeile benutzen, nicht einen neuen erstellen (Werte werden immer überschrieben) 
   (define vectorINJ (make-vector columns))
-  (vector-set! vectorINJ x wert)
-  (vector-set! spielfeld y vectorINJ)
+  (vector-set! vectorINJ y wert)
+  (vector-set! spielfeld x vectorINJ)
   )
 
-; Setze im ersten Vektor an dritter Stelle eine 5
-(setzeZelle 0 2 5)
+; Tests
+(setzeZelle 0 0 1)
+(setzeZelle 0 2 1)
 
 ; Spielfeld ausgeben
 spielfeld
@@ -112,8 +112,7 @@ spielfeld
 
 ; Aufgabe 2.2.4
 (define (simulation x)
-	; TODO
-
+  ; TODO
   x
   )
 
