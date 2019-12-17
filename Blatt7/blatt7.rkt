@@ -102,11 +102,11 @@ spielfeld
 
   (cond
     ; Tote Zelle mit drei Nachbarn wird neu geboren
-    [(and (= anzahlNachbarn 3) (= (gibZelle x y) 0)) ]
+    [(and (= anzahlNachbarn 3) (= (gibZelle x y) 0)) (setzeZelle 1)]
     ; Lebende Zelle mit weniger als zwei lebenden Nachbarn stirbt an Einsamkeit
-    ;[()]
-    ; Lebende Zelle mit mehr als drei lebenden Nachbarn stirbt wegen Überbevölkerung
-    ;[()]
+    [(and (< anzahlNachbarn 2) (= (gibZelle x y) 1)) (setzeZelle 0)]
+    ; Lebende Zelle mit mehr als drei lebenden Nachbarn stirbt an Überbevölkerung
+    [(and (> anzahlNachbarn 3) (= (gibZelle x y) 1)) (setzeZelle 0)]
     ))
 
 
