@@ -44,8 +44,8 @@
 ; Aufgabe 2.2.1
 
 ; Spielfeld-Dimensionen
-(define rows 10)
-(define columns 10)
+(define rows 31)
+(define columns 31)
 
 (define (spielfeldErstellen rows columns)
   ;(make-vector rows (make-vector columns)
