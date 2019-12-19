@@ -59,8 +59,8 @@
 (define (zeichne x)
 
   (cond
-    [(= x 0) (square 10 "outline" "yellow")]
-    [(= x 1) (square 10 "outline" "red")]))
+    [(= x 0) (square 10 "outline" "black")]
+    [(= x 1) (square 10 "solid" "black")]))
 
 ; Gib Zelleninhalt zurück
 (define (gibZelle x y)
@@ -79,13 +79,12 @@
 (setzeZelle 0 1 1)
 
 
-
 ; Spielfeld ausgeben
 spielfeld
 
 ; Bestimme 3, 5 oder 8 Nachbarn und tue die Werte in einer Liste
 (define (bestimmeNachbarn x y)
-
+ 
   (let* ([n1 (gibZelle (- x 1) (- y 1))]
          [n2 (gibZelle (- x 1) y)]
          [n3 (gibZelle (- x 1) (+ y 1))]
@@ -96,11 +95,27 @@ spielfeld
          [n8 (gibZelle (+ x 1) (- y 1))])
     (list n1 n2 n3 n4 n5 n6 n7 n8)))
 
-; Aufgabe 2.2.3
+;(let* ([n1 (if (or (= x 0) (= y 0)) 0
+          ;       (gibZelle (- x 1) (- y 1)))]
+         ;[n2 (if (= x 0) 0
+        ;         (gibZelle (- x 1) y))]
+         ;[n3 (if (or (= x 0) (= y 30) 0 (gibZelle (- x 1) (+ y 1))]
+         ;[n4 (gibZelle x (- y 1))]
+         ;[n5 (gibZelle x (+ y 1))]
+         ;[n6 (gibZelle (+ x 1) (+ y 1))]
+         ;[n7 (gibZelle (+ x 1) y)]
+         ;[n8 (gibZelle (+ x 1) (- y 1))])
+    ;(list n1 n2 n3 n4 n5 n6 n7 n8)))
+
+;(bestimmeNachbarn 0 0)
+
 (define (totOderLebendig x y)
+(if(or (= x 0) (= y 0) (= x 31) (= y 31)) 0 (totOderLebendig2 x y))
+)
+; Aufgabe 2.2.3
+(define (totOderLebendig2 x y)
 
   (define anzahlNachbarn (count positive? (bestimmeNachbarn x y)))
-
   (cond
     ; Tote Zelle mit drei Nachbarn wird neu geboren
     [(and (= anzahlNachbarn 3) (= (gibZelle x y) 0)) (setzeZelle 1)]
@@ -129,5 +144,11 @@ spielfeld
       (vector->list (car liste)) (vektorenAlsListe (cdr liste))))
   )
 
+(define (next_phase current_spielfeld)
+  (for/vector ([i current_spielfeld]) (for/vector ([j i]) (setzeZelle (vector-ref i j) j 9) (print 111111))
+                                        
+  ))
 ; Spielfeld anzeigen
-;(display (map zeichne (flatten (vektorenAlsListe listenSpielfeld))))
+;(display(map zeichne (flatten (vektorenAlsListe listenSpielfeld))))
+
+;(big-bang (on-tick (zeichneBaum) 0.25))
