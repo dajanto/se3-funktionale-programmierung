@@ -1,101 +1,84 @@
 #lang racket
 
+
 ; Aufgabe 1)
 
 ; 1.
 
 ; Funktionen höherer Ordnung sind Funktionen, welche Funktionen 
 ; als Argumente erhalten, oder als Wert zurückgeben
+
 ; 2.
-; (a): foldl ist eine Funktion höherer Ordnung, da als erster Parameter
-; eine Funktion erwartet wird.
+; (a) test-vergleiche ist eine Funktion höherer Ordnung, da als Paramter  
+; eine Funktion übergeben werden muss.
 
-; (b): Die Funktion ist eine Funktion höherer Ordnung, da
-; sie entweder car oder cdr zurückgibt, welches jeweils Funktionen sind.
+; (b) mul-lists ist keine Funktion höherer Ordnung, da keine Funktion als Paramter
+; übergeben wird und auch keine Funktion als Wert zurückgegeben wird.
 
-; (c) ist eine Funktion höherer Ordnung, da für den Parameter f
-; eine Funktion erwartet wird und eine Funktion zurückgegeben wird.
+; (c) plus ist keine Funktion höherer Ordnung, da als Parameter zwei Zahlen übergeben
+; werden und lambda eine annonyme, lokale Funktion ist.
 
-; (d) ist keine Funktion höherer Ordnung, da keine Funktion 
-; zurückgegeben wird und auch keine Funktion erwartet wird.
+; (d) ermittle-vergleichsoperation ist eine Funktion höherer Ordnung, da  
+; eine Vergleichsoperation als Wert zurückgegeben wird.
+
+; (e) schweinchen-in-der-mitte ist eine Funktion höherer Ordnung, weil eine
+; eine Funktion als Paramter übergeben werden muss.
 
 ; 3.
 
-; Nach der inneren Reduktion wird zunächst (pimento + 1) ausgeführt.
-; Dabei wird f an + gebunden und arg1 wird an 1 gebunden.
-; Der zurückgegebenen Closure wird nun 3 als Argument übergeben. 
-; Damit wird arg2 an 3 gebunden. Schließlich wird (+ 1 3) ausgeführt
-; und als Ergebnis 4 zurückgegeben.
+; Zunächst wird bei dem vorgegebenen Funktionsaufruf die Zahl 4 an die Funktion f gebunden.
+; Die Zahlen 1 und 3 die bei dem Aufruf erst hinter der Klammer kommen, definieren für den
+; schon gebunden Wert 4 die Umgebung. 
 
 ; 4.
 
-; (foldl (curry * 2) 1 '(1 2 3)) -> 48, weil zunächst (curry * 2)
-; aufgelöst wird zu einer Closure, die sich wie * verhält, aber
-; bereits den Faktor 2 auf jeden Fall im Endprodukt hat.
+; (foldl (curry + 3) 1 '(2 3 5)) -> 20, weil zunächst (curry + 3)
+; aufgelöst wird zu einer Closure, die sich wie + verhält, aber 
+; zunächst noch nicht den zweiten Paramter für die Addition braucht.
+; dieser wird nach und nach aus der Liste genommen.
 ; Anschließend wird foldl ausgeführt und verwendet die Elemente der Liste
-; als Argumente für die Closure. 1 wird als letztes Argument verwendet.
-; (* 2 1 2 3 1) -> 48
+; als Argumente für die Closure. 1 wird als letztes Argument verwendet. 
+;
 
-; (map cons '(1 2 3) '(1 2 3)) -> '((1 . 1) (2 . 2) (3 . 3)),
-; weil cons auf die Elemente der übergebenen Listen angewendet wird.
-; Es wird mit dem jeweils ersten Element der Listen begonnen.
-; Daraus ergibt sich dann:
-; (cons 1 1) -> (1 . 1)
-; (cons 2 2) -> (2 . 2)
-; (cons 3 3) -> (3 . 3)
-; Die Ergebnisse der Aufrufe von cons landen dann in der Reihenfolge
-; in der Ergebnisliste.
+; (map even? '(4 587 74 69 969 97 459 4)) gibt (#t #f #t #f #f #f #f #t) zurück
+; die Funktion map bekommt die Liste und eine Funktion als Paramter und wendet auf jedes Element
+; der Liste die Funktion an. 
 
-; (filter pair? '((a b ) () 1 (()))) -> '((a b) (())), weil
-; filter eine Liste solcher Elemente zurückgibt, für die pair?
-; true zurückgibt. 
-; (pair? '(a b)) -> #t
-; (pair? '()) -> #f
-; (pair? 1) -> #f
-; (pair? '(())) -> #t
-; Daraus ergibt sich die oben genannte Rückgabeliste.
+; (filter number? '(#f (2) 3 (()) 4 -7 "c")) gibt '(3 4 -7) zurück.
+; Die Funktion Filter bekommt ebenfalls eine Liste und eine Funktion
+; übergeben und filtert mittels der Funktion Werte aus der Liste heraus
+; und übergibt die Restliste. 
 
-; (map (compose (curry - 32) (curry * 1.8)) 
-;     '(5505 100 0 -273.15)) -> '(-9877.0 -148.0 32 523.67), weil
-; zunächst nach der inneren Reduktion die beiden curry-Aufrufe
-; je eine Closure zurückgeben. Anschließend wird compose ausgeführt
-; und erzeugt eine Nacheinanderausführung (closure) der beiden Closures,
-; wobei die zweite Closure zuerst und die erste Closure danach
-; ausgeführt wird.
-; Schließlich wird map aufgerufen und führt die erstellte Nacheinanderausführung
-; nacheinander für jedes Listenelement aus.
-; Daraus ergibt sich:
-; (closure 5505) -> (- 32 (* 1.8 5505)) -> -9877.0
-; (closure 100) -> (- 32 (* 1.8 100)) -> -148.0
-; (closure 0) -> (- 32 (* 1.8 0)) -> 32
-; (closure -273.15) -> (- 32 (* 1.8 -273.15)) -> 523.67
+; ((curry filter (compose test-vergleich (curry ermittle-vergleichsoperation 1 1))) '(5682 48 24915 -45 -6 48 11))
+; gibt eine Fehlermeldung zurück, da compose nicht zwei Funktionen übergeben bekommt, sondern eine Boolean. 
+
 
 ; Aufgabe 2)
 (define xs '(1 2 3 6 7 8 21 22))
-; 1.
-(define (square x)
-  (* x x))
-(map square xs)
 
-; 2.
+; 1)
+
+(map (lambda (x) (* x x))  xs)
+
+; 2)
 (filter 
- (λ (x)
+ (lambda (x)
    (or (= 0 (modulo x 7)) (= 0 (modulo x 3))))
  xs)
 
-; 3.
+; 3)
 (foldl +
        0
        (filter 
-        (λ (x)
+        (lambda (x)
           (and [even? x]
                [> x 6])
           )
         xs))
 
-; 4.
+; 4)
 (define (split pred xs)
-  (letrec ((rec (λ (xs acc1 acc2)
+  (letrec ((rec (lambda (xs acc1 acc2)
                   (if (empty? xs)
                       (list acc1 acc2)
                       (if (pred (car xs))
@@ -111,108 +94,150 @@
     (rec xs '() '())))
 (split even? xs)
 
-; Aufgabe 3)
+; ##############################################################################
+; ## Aufgabe 3.1 ###############################################################
+; ##############################################################################
 
-; 1.
+; KOMMENTAR: 24 Pkt
 
-(define (key->wert key tafel)
-  (cdr (assoc key tafel)))
+#|
+Die Repräsentation der möglichen Eigenschaften einer Karte implementieren wir
+als vier verscheidene Listen, die jeweils alle möglichen Ausprägung einer
+Eigenschaft enthalten.
+|#
+( define counts '(1 2 3) )
+( define patterns '(waves oval rectangle) )
+( define modes '(outline solid hatched) )
+( define colors '(red green blue) )
 
-; Datenstruktur für mögliche Ausprägungen
-(define ausprägungen
-  `((Form . ,'(Oval Rechteck Welle))
-    (Farbe . ,'(rot blau grün))
-    (Anzahl . ,'(ein zwei drei))
-    (Füllung . ,'(Linie Schraffur Fläche))))
+#|
+Eine einzelne Karte implementieren wir ebenfalls als eine List, die ihre Eigen-
+schaften in folgender Reihenfolge enthält: Anzahl, Form, Füllmuster, Farbe.
+|#
+( define sample-card1 '(3 waves hatched green) )
+( define sample-card2 '(2 waves solid red))
+( define sample-card3 '(1 waves outline blue))
 
-(define translationList
-  `((Oval . oval)
-    (Rechteck . rectangle)
-    (Welle . waves)
-    (rot . red)
-    (blau . blue)
-    (grün . green)
-    (ein . 1)
-    (zwei . 2)
-    (drei . 3)
-    (Linie . outline)
-    (Schraffur . hatched)
-    (Fläche . solid)))
+#|
+Zur Überprüpfung definieren wir uns noch ein paar Sets
+|#
+( define set (list sample-card1 sample-card2 sample-card3) )  ; All different
+( define set2 (list sample-card1 sample-card1 sample-card1) ) ; All the same
+( define no-set (list sample-card1 sample-card2 sample-card1) ) ; We have duplicates (no set)
 
-; Eine Spielkarte ist repräsentiert durch eine Liste, die von vorne
-; nach hinten die Form, Farbe, Anzahl und Füllung durch ihre Elemente angibt.
 
-; 2. 
-; erzeugt die Spielkarten
-(define (erzeugeSpielkarten)
-  (letrec ((rec (λ (acc cards)
-                  (if (= -1 cards)
-                      acc
-                      (let ((d (modulo cards 3))
-                            (c (modulo (floor (/ cards 3)) 3))
-                            (b (modulo (floor (/ cards 9)) 3))
-                            (a (modulo (floor (/ cards 27)) 3)))
-                        (rec (cons (list
-                                    (list-ref (key->wert 'Form ausprägungen) a)
-                                    (list-ref (key->wert 'Farbe ausprägungen) b)
-                                    (list-ref (key->wert 'Anzahl ausprägungen) c)
-                                    (list-ref (key->wert 'Füllung ausprägungen) d))
-                                   acc)
-                          (- cards 1)))))))
-    (rec '() 80)))
+
+; ##############################################################################
+; ## Aufgabe 3.2 ###############################################################
+; ##############################################################################
 
 (require se3-bib/setkarten-module)
 
-; zeigt eine Set-Karte
-(define (zeigeKarte karte)
-  (show-set-card
-   (key->wert (third karte) translationList)
-   (key->wert (first karte) translationList)
-   (key->wert (fourth karte) translationList)
-   (key->wert (second karte) translationList)))
+; Hilfsfunktion
+; Zeigt eine Set-Karte an mit der angegbeben Funktion
+( define ( show-card card )
+   ( apply show-set-card card )
+   )
 
-(define (zeigeKarten karten)
-  (map zeigeKarte karten))
+; Erzeugt ein Deck mit 81 Set Karten, bei dem eine Karte jeder möglichen
+; Kombination vorhanden ist
+( define ( create-deck )
+   (for*/list ( [i counts]
+                [j patterns]
+                [k modes]
+                [l colors]
+                )
+      (list i j k l)
+     )
+   )
+; KOMMENTAR: Schön, dass ihr for* entdeckt habt.
+; KOMMENTAR: Leider ist das nicht so schön funktional.
+; KOMMENTAR: Wie würde man das Ganze ohne dieses Konstrukt lösen?
+; KOMMENTAR: Und vor allem: Was macht das append da?!
 
-; 3.
+; Gibt eine Liste von Karten aus
+( define ( visualize-cards cards )
+   ( map show-card cards )
+   )
 
-(define (is-a-set? karten)
-  (let* ([gleich (λ (wert1 wert2 wert3)
-                   (and 
-                    (equal? wert1 wert2)
-                    (equal? wert1 wert3)
-                    ))]
-         [verschieden (λ (wert1 wert2 wert3)
-                        (and
-                         (not (equal? wert1 wert2))
-                         (not (equal? wert1 wert3))
-                         (not (equal? wert2 wert3))
-                         ))]
-         [qualified (λ (wert1 wert2 wert3)
-                      (or
-                       (gleich wert1 wert2 wert3)
-                       (verschieden wert1 wert2 wert3)
-                       ))])
-    (and 
-     (qualified (first (first karten))
-                (first (second karten))
-                (first (third karten)))
-     (qualified (second (first karten))
-                (second (second karten))
-                (second (third karten)))
-     (qualified (third (first karten))
-                (third (second karten))
-                (third (third karten)))
-     (qualified (fourth (first karten))
-                (fourth (second karten))
-                (fourth (third karten))))))
 
-(display "is-a-set?(#t): ")
-(is-a-set? '((Oval rot ein Linie)
-             (Rechteck rot zwei Linie)
-             (Welle rot drei Linie)))
-(display "is-a-set?(#f): ")
-(is-a-set? '((Oval rot ein Linie)
-             (Oval blau zwei Fläche)
-             (Welle rot drei Linie)))
 
+; ##############################################################################
+; ## Aufgabe 3.3 ###############################################################
+; ##############################################################################
+
+; Hilfsfunktion
+; Überprüft ob eine Liste nur die gleichen (equal?) Elemente beinhaltet
+( define (all-the-same? list)
+   ; Sind genug Daten (Paare) vorhanden, um vergleichen zu können?
+  (if
+   (and (pair? list) (pair? (cdr list)))
+   ; Ist das vordereste und das nächste Element identisch?
+    (if
+     (equal? (car list) (cadr list))
+     (all-the-same? (cdr list)) ; Rekursiv durch die Liste arbeiten
+     #f ; Nein? Dann sind nicht alle Elemente identisch
+     )
+    
+    #t
+   )
+)
+; KOMMENTAR: Probiert mal das mit "andmap" zu lösen.
+
+; Hilfsfunktion
+; Überprüpft ob eine Liste nur unterschiedliche Elemente beinhaltet
+( define (all-different? list)
+   ; Ist dies eine List?
+   (if
+    (pair? list)
+    
+    ; Kann ich das vordereste Element in der Liste finden (member?) ?
+    (if
+     (member (car list) (cdr list))
+     #f
+     (all-different? (cdr list)) ; Rekursiv durch die Liste arbeiten
+     )
+    
+     #t
+    )
+   )
+; KOMMENTAR: Dies könnte man auch mit FHOs lösen.
+; KOMMENTAR: (Das ist aber schon deutlich schwieriger als all-same)
+
+; Überprüpft ob die übergebenen Karten ein Set sind
+( define ( is-a-set? cards )
+   ; Sind es wirklich 3 Karten?
+   (if
+    (= 3 (length cards))
+   
+    ; Sind da noch genug Eigenschaften.
+    ; Bei leerer Liste (durch rekursiven Vorgang) muss dies ein Set sein
+    (if 
+     (> 1 (length (car cards)))
+     #t
+     
+     ; Sonst muss gelten, dass die aktuellen Eigenschaften alle
+     ; identisch ODER unterschiedlich sein müssen
+     ; UND die restlichen Eigenschaften auch ein Set bilden.
+     (and      
+       (or
+         (all-the-same?  (map car cards))
+         (all-different? (map car cards))
+        )
+        (is-a-set? (map cdr cards))
+      )
+     
+     ; Sind da noch genug Eigenschaften. (REST)
+     )
+    
+   ; Sind es wirklich 3 Karten? (REST)
+    #f
+   )
+)
+   
+(display "Ergibt die Kombination set1 ein SET?")
+(is-a-set? set)
+(display "Ergibt die Kombination set2 ein SET?")
+(is-a-set? set2)
+(display "Ergibt die Kombination set3 ein SET?")
+(is-a-set? no-set)
