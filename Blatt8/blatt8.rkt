@@ -1,72 +1,90 @@
 #lang racket
 
+#|
+  SE3 Funktionale Programmierung
+  WiSe 2019/20, Uni Hamburg
+  
+  Gruppe H
+  Aufgabenblatt 08
 
-; Aufgabe 1)
+  Vorstellung am 08.01.2020
 
-; 1.
 
-; Funktionen höherer Ordnung sind Funktionen, welche Funktionen 
-; als Argumente erhalten, oder als Wert zurückgeben
+  Aufgabe 1)
+  ----------------------------------------------------------------------
 
-; 2.
-; (a) test-vergleiche ist eine Funktion höherer Ordnung, da als Paramter  
-; eine Funktion übergeben werden muss.
+  1.
 
-; (b) mul-lists ist keine Funktion höherer Ordnung, da keine Funktion als Paramter
-; übergeben wird und auch keine Funktion als Wert zurückgegeben wird.
+  Funktionen höherer Ordnung sind Funktionen, welche Funktionen 
+  als Argumente erhalten, oder als Wert zurückgeben
 
-; (c) plus ist keine Funktion höherer Ordnung, da als Parameter zwei Zahlen übergeben
-; werden und lambda eine annonyme, lokale Funktion ist.
+  2.
+  (a) test-vergleiche ist eine Funktion höherer Ordnung, da als Paramter  
+  eine Funktion übergeben werden muss.
 
-; (d) ermittle-vergleichsoperation ist eine Funktion höherer Ordnung, da  
-; eine Vergleichsoperation als Wert zurückgegeben wird.
+  (b) mul-lists ist keine Funktion höherer Ordnung, da keine Funktion als Paramter
+  übergeben wird und auch keine Funktion als Wert zurückgegeben wird.
 
-; (e) schweinchen-in-der-mitte ist eine Funktion höherer Ordnung, weil eine
-; eine Funktion als Paramter übergeben werden muss.
+  (c) plus ist keine Funktion höherer Ordnung, da als Parameter zwei Zahlen übergeben
+  werden und lambda eine annonyme, lokale Funktion ist.
 
-; 3.
+  (d) ermittle-vergleichsoperation ist eine Funktion höherer Ordnung, da  
+  eine Vergleichsoperation als Wert zurückgegeben wird.
 
-; Zunächst wird bei dem vorgegebenen Funktionsaufruf die Zahl 4 an die Funktion f gebunden.
-; Die Zahlen 1 und 3 die bei dem Aufruf erst hinter der Klammer kommen, definieren für den
-; schon gebunden Wert 4 die Umgebung. 
+  (e) schweinchen-in-der-mitte ist eine Funktion höherer Ordnung, weil eine
+  eine Funktion als Paramter übergeben werden muss.
 
-; 4.
+  3.
 
-; (foldl (curry + 3) 1 '(2 3 5)) -> 20, weil zunächst (curry + 3)
-; aufgelöst wird zu einer Closure, die sich wie + verhält, aber 
-; zunächst noch nicht den zweiten Paramter für die Addition braucht.
-; dieser wird nach und nach aus der Liste genommen.
-; Anschließend wird foldl ausgeführt und verwendet die Elemente der Liste
-; als Argumente für die Closure. 1 wird als letztes Argument verwendet. 
-;
+  Zunächst wird bei dem vorgegebenen Funktionsaufruf die Zahl 4 an die Funktion f gebunden.
+  Die Zahlen 1 und 3 die bei dem Aufruf erst hinter der Klammer kommen, definieren für den
+  schon gebunden Wert 4 die Umgebung. 
 
-; (map even? '(4 587 74 69 969 97 459 4)) gibt (#t #f #t #f #f #f #f #t) zurück
-; die Funktion map bekommt die Liste und eine Funktion als Paramter und wendet auf jedes Element
-; der Liste die Funktion an. 
+  4.
 
-; (filter number? '(#f (2) 3 (()) 4 -7 "c")) gibt '(3 4 -7) zurück.
-; Die Funktion Filter bekommt ebenfalls eine Liste und eine Funktion
-; übergeben und filtert mittels der Funktion Werte aus der Liste heraus
-; und übergibt die Restliste. 
+  (foldl (curry + 3) 1 '(2 3 5)) -> 20, weil zunächst (curry + 3)
+  aufgelöst wird zu einer Closure, die sich wie + verhält, aber 
+  zunächst noch nicht den zweiten Paramter für die Addition braucht.
+  dieser wird nach und nach aus der Liste genommen.
+  Anschließend wird foldl ausgeführt und verwendet die Elemente der Liste
+  als Argumente für die Closure. 1 wird als letztes Argument verwendet. 
 
-; ((curry filter (compose test-vergleich (curry ermittle-vergleichsoperation 1 1))) '(5682 48 24915 -45 -6 48 11))
-; gibt eine Fehlermeldung zurück, da compose nicht zwei Funktionen übergeben bekommt, sondern eine Boolean. 
 
+  (map even? '(4 587 74 69 969 97 459 4)) gibt (#t #f #t #f #f #f #f #t) zurück
+  die Funktion map bekommt die Liste und eine Funktion als Paramter und wendet auf jedes Element
+  der Liste die Funktion an. 
+
+  (filter number? '(#f (2) 3 (()) 4 -7 "c")) gibt '(3 4 -7) zurück.
+  Die Funktion Filter bekommt ebenfalls eine Liste und eine Funktion
+  übergeben und filtert mittels der Funktion Werte aus der Liste heraus
+  und übergibt die Restliste. 
+
+  ((curry filter (compose test-vergleich (curry ermittle-vergleichsoperation 1 1))) '(5682 48 24915 -45 -6 48 11))
+  gibt eine Fehlermeldung zurück, da compose nicht zwei Funktionen übergeben bekommt, sondern eine Boolean. 
+
+|#
 
 ; Aufgabe 2)
+; --------------------------------------------------------------------------------------------------
+
+; Liste mit natürlichen Zahlen zum Testen.
 (define xs '(1 2 3 6 7 8 21 22))
 
 ; 1)
-
-(map (lambda (x) (* x x))  xs)
+; Lamdda nutzen um zu eine Funktion zu Erstellen ,die 2 Zahlen quadriert und
+; map wendet ein procedure auf alle Elemente einer Liste an
+(map(lambda (x) (* x x))  xs)
 
 ; 2)
+; Filter erzeugt eine Teilliste, wenn die procedure true wiedergiebt.
 (filter 
  (lambda (x)
    (or (= 0 (modulo x 7)) (= 0 (modulo x 3))))
  xs)
 
 ; 3)
+; Foldl wendet ein procedure auf alle Elemente einer Liste an (wie map),
+; aber vereinigt die Ergebnisse durch summieren.
 (foldl +
        0
        (filter 
@@ -94,11 +112,8 @@
     (rec xs '() '())))
 (split even? xs)
 
-; ##############################################################################
-; ## Aufgabe 3.1 ###############################################################
-; ##############################################################################
-
-; KOMMENTAR: 24 Pkt
+; Aufgabe 3.1
+; ---------------------------------------------------
 
 #|
 Die Repräsentation der möglichen Eigenschaften einer Karte implementieren wir
@@ -118,18 +133,16 @@ schaften in folgender Reihenfolge enthält: Anzahl, Form, Füllmuster, Farbe.
 ( define sample-card2 '(2 waves solid red))
 ( define sample-card3 '(1 waves outline blue))
 
-#|
-Zur Überprüpfung definieren wir uns noch ein paar Sets
-|#
-( define set (list sample-card1 sample-card2 sample-card3) )  ; All different
-( define set2 (list sample-card1 sample-card1 sample-card1) ) ; All the same
-( define no-set (list sample-card1 sample-card2 sample-card1) ) ; We have duplicates (no set)
+
+; Wir definieren 3 sets zum Testen.
+( define set (list sample-card1 sample-card2 sample-card3) )  ; Alle unterschiedlich
+( define set2 (list sample-card1 sample-card1 sample-card1) ) ; Alle gleich 
+( define no-set (list sample-card1 sample-card2 sample-card1) ) ; Enthält Duplikate (ist kein set)
 
 
 
-; ##############################################################################
-; ## Aufgabe 3.2 ###############################################################
-; ##############################################################################
+; Aufgabe 3.2
+; --------------------------------------------------------
 
 (require se3-bib/setkarten-module)
 
@@ -150,10 +163,7 @@ Zur Überprüpfung definieren wir uns noch ein paar Sets
       (list i j k l)
      )
    )
-; KOMMENTAR: Schön, dass ihr for* entdeckt habt.
-; KOMMENTAR: Leider ist das nicht so schön funktional.
-; KOMMENTAR: Wie würde man das Ganze ohne dieses Konstrukt lösen?
-; KOMMENTAR: Und vor allem: Was macht das append da?!
+
 
 ; Gibt eine Liste von Karten aus
 ( define ( visualize-cards cards )
@@ -162,9 +172,8 @@ Zur Überprüpfung definieren wir uns noch ein paar Sets
 
 
 
-; ##############################################################################
-; ## Aufgabe 3.3 ###############################################################
-; ##############################################################################
+; Aufgabe 3.3
+; ------------------------------------------------------
 
 ; Hilfsfunktion
 ; Überprüft ob eine Liste nur die gleichen (equal?) Elemente beinhaltet
@@ -182,7 +191,7 @@ Zur Überprüpfung definieren wir uns noch ein paar Sets
     #t
    )
 )
-; KOMMENTAR: Probiert mal das mit "andmap" zu lösen.
+
 
 ; Hilfsfunktion
 ; Überprüpft ob eine Liste nur unterschiedliche Elemente beinhaltet
@@ -201,8 +210,7 @@ Zur Überprüpfung definieren wir uns noch ein paar Sets
      #t
     )
    )
-; KOMMENTAR: Dies könnte man auch mit FHOs lösen.
-; KOMMENTAR: (Das ist aber schon deutlich schwieriger als all-same)
+
 
 ; Überprüpft ob die übergebenen Karten ein Set sind
 ( define ( is-a-set? cards )
