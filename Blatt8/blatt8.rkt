@@ -94,23 +94,6 @@
           )
         xs))
 
-; 4)
-(define (split pred xs)
-  (letrec ((rec (lambda (xs acc1 acc2)
-                  (if (empty? xs)
-                      (list acc1 acc2)
-                      (if (pred (car xs))
-                          (rec 
-                              (cdr xs) 
-                            (cons (car xs) acc1) 
-                            acc2)
-                          (rec
-                              (cdr xs)
-                            acc1
-                            (cons (car xs) acc2))
-                          )))))
-    (rec xs '() '())))
-(split even? xs)
 
 ; Aufgabe 3.1
 ; ---------------------------------------------------
@@ -146,12 +129,6 @@ schaften in folgender Reihenfolge enthält: Anzahl, Form, Füllmuster, Farbe.
 
 (require se3-bib/setkarten-module)
 
-; Hilfsfunktion
-; Zeigt eine Set-Karte an mit der angegbeben Funktion
-( define ( show-card card )
-   ( apply show-set-card card )
-   )
-
 ; Erzeugt ein Deck mit 81 Set Karten, bei dem eine Karte jeder möglichen
 ; Kombination vorhanden ist
 ( define ( create-deck )
@@ -164,16 +141,21 @@ schaften in folgender Reihenfolge enthält: Anzahl, Form, Füllmuster, Farbe.
      )
    )
 
+; Hilfsfunktion
+; Zeigt eine Set-Karte an mit der angegbeben Funktion
+( define ( show-card card )
+   ( apply show-set-card card )
+   )
 
-; Gibt eine Liste von Karten aus
+; Zeichne eine Liste von Karten 
 ( define ( visualize-cards cards )
    ( map show-card cards )
    )
 
 
-
 ; Aufgabe 3.3
 ; ------------------------------------------------------
+
 
 ; Hilfsfunktion
 ; Überprüft ob eine Liste nur die gleichen (equal?) Elemente beinhaltet
@@ -200,7 +182,7 @@ schaften in folgender Reihenfolge enthält: Anzahl, Form, Füllmuster, Farbe.
    (if
     (pair? list)
     
-    ; Kann ich das vordereste Element in der Liste finden (member?) ?
+    ; Kann ich das vordereste Element  in der Liste finden (member?) ?
     (if
      (member (car list) (cdr list))
      #f
