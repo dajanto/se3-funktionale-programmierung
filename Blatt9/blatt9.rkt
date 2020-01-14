@@ -3,9 +3,6 @@
 (require swindle/setf
          swindle/misc)
 
-
-; Aufgabe 1:
-
 ; 1.1
 ; Definiere eine Klasse "Video" mit mindestens folgenden Attributen: #eindeutigem Schlüssel#, #Name des Erstellers#, #Erscheinungsjahr#, #Titel der Veröffentlichung#
 ; Je nach Art des Videos (Film, Serie, YouTube-Video) sind noch zusätzliche Attribute notwendig. -> Vererbung?
@@ -204,7 +201,6 @@
                  ", " 
                  (number->string(erscheinungsmonatAcc y))))
 
-
 ; 2.1
 
 ; Eine CLOS-Klasse von Tieren für Lebensräume
@@ -220,14 +216,7 @@
 ; Flugfähige Lufttiere
 
 
-
 ; 2.2
 
-
-
-
 ; 2.3
-
-
-
 
