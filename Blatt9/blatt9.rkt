@@ -1,29 +1,30 @@
 #lang swindle
 
- (require swindle/setf
-          swindle/misc)
+(require swindle/setf
+         swindle/misc)
 
 
 ; Aufgabe 1:
 
-; 1.1)
+; 1.1
 ; Definiere eine Klasse "Video" mit mindestens folgenden Attributen: #eindeutigem Schlüssel#, #Name des Erstellers#, #Erscheinungsjahr#, #Titel der Veröffentlichung#
 ; Je nach Art des Videos (Film, Serie, YouTube-Video) sind noch zusätzliche Attribute notwendig. -> Vererbung?
 ; 1. Film: Attr: Produktionsgesellschaft, Regisseur, Genre, FSK
 ; 2. Serie: Attr: alles was Film hat und noch: Name der Plattform, Nummer der Folge
 ; 3. YT-Video: Attr: Name des Kanals, Link zum Video, Erscheinungsmonat 
 
-; Video Klasse
-
+; Video-Klasse
 (defclass* video ()
   (schluessel
+   :accessor schluesselAcc
    :reader get-schluessel
    :initarg :schluessel
    :initvalue 0
    :type <number>
-   :documentation "Der eindeutuge Schlüssel des Elements"
+   :documentation "Der eindeutige Schlüssel des Elements"
    )
   (ersteller
+   :accessor erstellerAcc
    :reader get-ersteller
    :initarg :ersteller
    :initvalue ""
@@ -31,6 +32,7 @@
    :documentation "Der Ersteller des Videos"
    )
   (erscheinungsjahr
+   :accessor erscheinungsjahrAcc
    :reader get-erscheinungsjahr
    :initarg :erscheinungsjahr
    :initvalue 0
@@ -38,6 +40,7 @@
    :documentation "Das Erscheinungsjahr des Videos"
    )
   (titel
+   :accessor titelAcc
    :reader get-titel
    :initarg :titel
    :initvalue ""
@@ -46,17 +49,18 @@
    )
   )
 
-; Film Klasse
-
+; Film-Klasse
 (defclass* film (video)
-  (produktionsgesellschafft
-   :reader get-produktionsgesellschafft
-   :initarg :produktionsgesellschafft
+  (produktionsgesellschaft
+   :accessor produktionsgesellschaftAcc
+   :reader get-produktionsgesellschaft
+   :initarg :produktionsgesellschaft
    :initvalue ""
    :type <string>
-   :documentation "Die Produktionsgesellschafft des Films"
+   :documentation "Die Produktionsgesellschaft des Films"
    )
   (regisseur
+   :accessor regisseurAcc
    :reader get-regisseur
    :initarg :regisseur
    :initvalue ""
@@ -64,6 +68,7 @@
    :documentation "Der Regisseur des Films"
    )
   (genre
+   :accessor genreAcc
    :reader get-genre
    :initarg :genre
    :initvalue ""
@@ -71,6 +76,7 @@
    :documentation "Das Genre des Films"
    )
   (fsk
+   :accessor fskAcc
    :reader get-fsk
    :initarg :fsk
    :initvalue 0
@@ -79,10 +85,10 @@
    )
   )
 
-; Serie Klasse
-
+; Serien-Klasse
 (defclass* serie (film)
   (plattform
+   :accessor plattformAcc
    :reader get-plattform
    :initarg :plattform
    :initvalue ""
@@ -90,6 +96,7 @@
    :documentation "Die Plattform auf der die Serie gezeigt wird"
    )
   (episode
+   :accessor episodeAcc
    :reader get-episode
    :initarg :episode
    :initvalue 0
@@ -98,10 +105,10 @@
    )
   )
 
-; Youtube-Video Klasse
-
+; YouTube-Video-Klasse
 (defclass* youtube_video (video)
   (kanal
+   :accessor kanalAcc
    :reader get-kanal
    :initarg :kanal
    :initvalue ""
@@ -109,6 +116,7 @@
    :documentation "Der Name des Kanals von dem das YT Video stammt"
    )
   (link
+   :accessor linkAcc
    :reader get-link
    :initarg :link
    :initvalue ""
@@ -116,6 +124,7 @@
    :documentation "Der Link zum Video"
    )
   (erscheinungsmonat
+   :accessor erscheinungsmonatAcc
    :reader get-erscheinungsmonat
    :initarg :erscheinungsmonat
    :initvalue 0
@@ -124,8 +133,7 @@
    )
   )
 
-; Beispiel Videos:
-
+; Beispielvideos:
 (define _film
   (make film
         :schluessel 1
@@ -166,26 +174,60 @@
         )
   )
 
-; 1.2)
 
-; TODO: Funktionen zu Ende implementieren
+; 1.2
 
 ; Generische Funktion und klassenbasierte Methoden:
-
-(defgeneric cite ((vi video) Zitat)
-  )
+(defgeneric* cite ((vi video)))
 
 ; Zitierfunktion für einen Film
-
-(defmethod cite ((f film))
-  )
-
+(defmethod cite ((fi film))
+  (string-append (produktionsgesellschaftAcc fi)
+                 ", " 
+                 (regisseurAcc fi)
+                 ", " 
+                 (genreAcc fi)
+                 ", " 
+                 (number->string(fskAcc fi))))
+              
 ; Zitierfunktion für eine Serie
-
 (defmethod cite ((s serie))
-  )
+  (string-append (plattformAcc s)
+                 ", " 
+                 (number->string(episodeAcc s))))
 
-; Zitierfunktion für ein Youtube-Video
-
+; Zitierfunktion für ein YouTube-Video
 (defmethod cite ((y youtube_video))
-  )
+  (string-append (kanalAcc y)
+                 ", " 
+                 (linkAcc y)
+                 ", " 
+                 (number->string(erscheinungsmonatAcc y))))
+
+
+; 2.1
+
+; Eine CLOS-Klasse von Tieren für Lebensräume
+
+; Landtiere
+; - Arboreal
+; - Saxicolous
+; - Arenicolous
+; - Troglofauna
+
+; Meerestiere
+
+; Flugfähige Lufttiere
+
+
+
+; 2.2
+
+
+
+
+; 2.3
+
+
+
+
