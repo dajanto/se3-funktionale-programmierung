@@ -259,16 +259,16 @@
    )
   
   )
-#|
-(defclass* land (tiere)
+
+(defclass land (tiere)
   
   )
 
-(defclass* wasser (tiere)
+(defclass wasser (tiere)
   
   )
 
-(defclass* luft (tiere land)
+(defclass luft (land)
   
   )
 
@@ -294,15 +294,17 @@
   
   )
 
-(defclass* libellen (land wasser luft)
-  
-  )
 
-(defclass* flugfaehiges_landtier (land luft)
+
+(defclass* flugfaehiges_landtier (luft land)
   
   )
 
 (defclass* fantasie_fisch (wasser luft)
+  
+  )
+#|
+(defclass* libellen (land wasser luft)
   
   )
 |#
