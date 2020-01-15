@@ -154,7 +154,7 @@
         :regisseur "Joe Ansolabehere"
         :genre "Dramedy"
         :fsk 0
-        :plattform "ABC"
+        :palttform "ABC"
         :episode 1
         )
   )
@@ -201,7 +201,6 @@
                  ", " 
                  (number->string(erscheinungsmonatAcc y))))
 
-
 ; 2.1
 
 ; Eine CLOS-Klasse von Tieren für Lebensräume
@@ -216,96 +215,6 @@
 
 ; Flugfähige Lufttiere
 
-(defclass* tiere ()
-  (lebensraum
-   :accessor lebensraumAcc
-   :reader get-lebensraum
-   :initarg :lebensraum
-   :initvalue ""
-   :type <string>
-   :documentation "Der Lebensraum des Tiers"
-   )
-  (maximalgeschwindigkeit
-   :accessor maximalgeschwindigkeitAcc
-   :reader get-maximalgeschwindigkeit
-   :initarg :maximalgeschwindigkeit
-   :initvalue 0
-   :type <number>
-   :documentation "Der Maximalgeschwindigkeit des Tiers"
-   )
-  (gefaehrlichkeit
-   :accessor gefaehrlichkeitAcc
-   :reader get-gefaehrlichkeit
-   :initarg :gefaehrlichkeit
-   :initvalue 1
-   :type <number>
-   :documentation "Der Gefaehrlichkeit für den Menschen"
-   )
-  (verbrauch
-   :accessor verbrauchAcc
-   :reader get-verbrauch
-   :initarg :verbrauch
-   :initvalue 1
-   :type <number>
-   :documentation "Der Verbrauch des Tiers"
-   )
-  (lebenserwartung
-   :accessor lebenserwartungAcc
-   :reader get-lebenserwartung
-   :initarg :lebenserwartung
-   :initvalue 1
-   :type <number>
-   :documentation "Die Lebenserwartung des Tiers"
-   )
-  
-  )
-#|
-(defclass* land (tiere)
-  
-  )
-
-(defclass* wasser (tiere)
-  
-  )
-
-(defclass* luft (tiere land)
-  
-  )
-
-
-
-(defclass* baum (land)
-  
-  )
-
-(defclass* stein (land)
-  
-  )
-
-(defclass* hoehle (land)
-  
-  )
-
-(defclass* sand (land)
-  
-  )
-
-(defclass* amphibie (land wasser)
-  
-  )
-
-(defclass* libellen (land wasser luft)
-  
-  )
-
-(defclass* flugfaehiges_landtier (land luft)
-  
-  )
-
-(defclass* fantasie_fisch (wasser luft)
-  
-  )
-|#
 
 ; 2.2
 
