@@ -312,14 +312,83 @@
 ; 2.2
 
 ; Generische Methoden
-( defgeneric gib-lebensraum ((t tier)))
-( defgeneric gib-maxSpeed ((t tier)))
-( defgeneric gib-gefaehrlichkeit ((t tier)))
-( defgeneric gib-verbrauch ((t tier)))
-( defgeneric gib-lebenserwartung ((t tier)))
+( defgeneric gib-lebensraum ((t tier)) :combination generic-append-combination)
+( defgeneric gib-maxSpeed ((t tier)) :combination generic-min-combination)
+( defgeneric gib-gefaehrlichkeit ((t tier)) :combination generic-max-combination)
+( defgeneric gib-verbrauch ((t tier)) :combination generic-max-combination)
+( defgeneric gib-lebenserwartung ((t tier)) :combination generic-min-combination)
 
 ; 2.3
 
-(defmethod gib-maxSpeed ((ti tiere))
-  (
+;Methoden für das Attribut Maximalgeschwindigkeit
+(defmethod gib-maxSpeed ((la land))
+  (get-maximalgeschwindigkeit la))
+
+(defmethod gib-maxSpeed ((wa wasser))
+  (get-maximalgeschwindigkeit wa))
+
+(defmethod gib-maxSpeed ((lu luft))
+  (get-maximalgeschwindigkeit lu))
+
+(defmethod gib-maxSpeed ((ba baum))
+  (get-maximalgeschwindigkeit ba))
+
+(defmethod gib-maxSpeed ((st stein))
+  (get-maximalgeschwindigkeit st))
+
+(defmethod gib-maxSpeed ((hoe hoehle))
+  (get-maximalgeschwindigkeit hoe))
+
+(defmethod gib-maxSpeed ((sa sand))
+  (get-maximalgeschwindigkeit sa))
+
+(defmethod gib-maxSpeed ((am amphibie))
+  (get-maximalgeschwindigkeit am))
+
+(defmethod gib-maxSpeed ((flula flugfaehiges_landtier))
+  (get-maximalgeschwindigkeit flula))
+
+
+(defmethod gib-maxSpeed ((fafi fantasie_fisch))
+  (get-maximalgeschwindigkeit fafi))
+
+(defmethod gib-maxSpeed ((li libellen))
+  (get-maximalgeschwindigkeit li))
+
+
+;Methoden für das Attribut Verbrauch
+(defmethod gib-verbrauch ((la land))
+  (get-maximalgeschwindigkeit la))
+
+(defmethod gib-verbrauch ((wa wasser))
+  (get-maximalgeschwindigkeit wa))
+
+(defmethod gib-verbrauch ((lu luft))
+  (get-maximalgeschwindigkeit lu))
+
+(defmethod gib-verbrauch ((ba baum))
+  (get-maximalgeschwindigkeit ba))
+
+(defmethod gib-verbrauch ((st stein))
+  (get-maximalgeschwindigkeit st))
+
+(defmethod gib-verbrauch ((hoe hoehle))
+  (get-maximalgeschwindigkeit hoe))
+
+(defmethod gib-verbrauch ((sa sand))
+  (get-maximalgeschwindigkeit sa))
+
+(defmethod gib-verbrauch ((am amphibie))
+  (get-maximalgeschwindigkeit am))
+
+(defmethod gib-verbrauch ((flula flugfaehiges_landtier))
+  (get-maximalgeschwindigkeit flula))
+
+
+(defmethod gib-verbrauch ((fafi fantasie_fisch))
+  (get-maximalgeschwindigkeit fafi))
+
+(defmethod gib-verbrauch ((li libellen))
+  (get-maximalgeschwindigkeit li))
+
 
