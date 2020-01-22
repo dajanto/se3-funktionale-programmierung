@@ -382,37 +382,48 @@
 
 ;Methoden für das Attribut Verbrauch
 (defmethod gib-verbrauch ((la land))
-  (get-maximalgeschwindigkeit la))
+  (get-verbrauch la))
 
 (defmethod gib-verbrauch ((wa wasser))
-  (get-maximalgeschwindigkeit wa))
+  (get-verbrauch wa))
 
 (defmethod gib-verbrauch ((lu luft))
-  (get-maximalgeschwindigkeit lu))
+  (get-verbrauch lu))
 
 (defmethod gib-verbrauch ((ba baum))
-  (get-maximalgeschwindigkeit ba))
+  (get-verbrauch ba))
 
 (defmethod gib-verbrauch ((st stein))
-  (get-maximalgeschwindigkeit st))
+  (get-verbrauch st))
 
 (defmethod gib-verbrauch ((hoe hoehle))
-  (get-maximalgeschwindigkeit hoe))
+  (get-verbrauch hoe))
 
 (defmethod gib-verbrauch ((sa sand))
-  (get-maximalgeschwindigkeit sa))
+  (get-verbrauch sa))
 
 (defmethod gib-verbrauch ((am amphibie))
-  (get-maximalgeschwindigkeit am))
+  (get-verbrauch am))
 
 (defmethod gib-verbrauch ((flula flugfaehiges_landtier))
-  (get-maximalgeschwindigkeit flula))
+  (get-verbrauch flula))
 
 
 (defmethod gib-verbrauch ((fafi fantasie_fisch))
-  (get-maximalgeschwindigkeit fafi))
+  (get-verbrauch fafi))
 
 (defmethod gib-verbrauch ((li libellen))
-  (get-maximalgeschwindigkeit li))
+  (get-verbrauch li))
 
+#|
 
+In CLOS existiert zu jeder Klasse eine Klassenpräzedenzsliste. Dadurch wird die
+Objektorientierung ermöglicht. Es ist wichtig, die Klassen von denen geerbit wird
+in der richtige Reihenfolge zu definieren, ansonst gibt es einen Fehler, da CLOS
+dann die Vererbungsstruktur nicht richtig aufbauen kann. Durch diese Vererbungs-
+struktur wird dann auch die Reihenfolge der Abarbeitung der Methoden festgelegt.
+Zuerst wird die Methode der Klasse mit der höchsten Präzendenz ausgeführt und dann
+falls eine combination-Regel existiert, auch die anderen tieferliegenden Klassen
+berücksichtigt.
+
+|#
