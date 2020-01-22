@@ -415,10 +415,22 @@
 (defmethod gib-verbrauch ((li libellen))
   (get-verbrauch li))
 
+
+(displayln (gib-maxSpeed _land))
+(displayln (gib-verbrauch _land))
+
+
+(displayln (gib-maxSpeed _wasser))
+(displayln (gib-verbrauch _wasser))
+
+(displayln (gib-maxSpeed _luft))
+(displayln (gib-verbrauch _luft))
+
+
 #|
 
 In CLOS existiert zu jeder Klasse eine Klassenpräzedenzsliste. Dadurch wird die
-Objektorientierung ermöglicht. Es ist wichtig, die Klassen von denen geerbit wird
+Objektorientierung ermöglicht. Es ist wichtig, die Klassen von denen geerbt wird
 in der richtige Reihenfolge zu definieren, ansonst gibt es einen Fehler, da CLOS
 dann die Vererbungsstruktur nicht richtig aufbauen kann. Durch diese Vererbungs-
 struktur wird dann auch die Reihenfolge der Abarbeitung der Methoden festgelegt.
