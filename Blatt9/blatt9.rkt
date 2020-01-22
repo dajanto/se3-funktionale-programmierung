@@ -311,6 +311,30 @@
 
 ; 2.2
 
+(define _land
+  (make land
+        :lebensraum "asdf"
+        :maximalgeschwindigkeit 1337
+        :gefaehrlichkeit 50
+        :verbrauch 70
+        :lebenserwartung 100))
+
+(define _luft
+  (make luft
+        :lebensraum "asdfqwer"
+        :maximalgeschwindigkeit 13137
+        :gefaehrlichkeit 5061
+        :verbrauch 7023
+        :lebenserwartung 10077))
+
+(define _wasser
+  (make wasser
+        :lebensraum "asdffghj"
+        :maximalgeschwindigkeit 1338
+        :gefaehrlichkeit 505
+        :verbrauch 701
+        :lebenserwartung 1100))
+
 ; Generische Methoden
 ( defgeneric gib-lebensraum ((t tier)) :combination generic-append-combination)
 ( defgeneric gib-maxSpeed ((t tier)) :combination generic-min-combination)
