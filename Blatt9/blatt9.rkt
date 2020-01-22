@@ -303,13 +303,23 @@
 (defclass* fantasie_fisch (wasser luft)
   
   )
-#|
-(defclass* libellen (land wasser luft)
+
+(defclass* libellen (wasser luft land)
   
   )
-|#
+
 
 ; 2.2
 
+; Generische Methoden
+( defgeneric gib-lebensraum ((t tier)))
+( defgeneric gib-maxSpeed ((t tier)))
+( defgeneric gib-gefaehrlichkeit ((t tier)))
+( defgeneric gib-verbrauch ((t tier)))
+( defgeneric gib-lebenserwartung ((t tier)))
+
 ; 2.3
+
+(defmethod gib-maxSpeed ((ti tiere))
+  (
 
