@@ -261,15 +261,36 @@
   )
 
 (defclass land (tiere)
-  
+  (gewicht
+   :accessor gewichtAcc
+   :reader get-gewicht
+   :initarg :gewicht
+   :initvalue 1
+   :type <number>
+   :documentation "Das gewicht des Tiers"
+   )  
   )
 
 (defclass wasser (tiere)
-  
+  (gleitfaehigkeit
+   :accessor gleitfaehigkeitAcc
+   :reader get-gleitfaehigkeit
+   :initarg :gleitfaehigkeit
+   :initvalue 1
+   :type <number>
+   :documentation "Die gleitfaehigkeit des Tiers"
+   )  
   )
 
-(defclass luft (land)
-  
+(defclass luft (tiere)
+  (flueghoehe
+   :accessor flueghoeheAcc
+   :reader get-flueghoehe
+   :initarg :flueghoehe
+   :initvalue 1
+   :type <number>
+   :documentation "Die flueghoehe des Tiers"
+   )  
   )
 
 
