@@ -1,123 +1,45 @@
-#lang racket
-
-#|
-  SE3 Funktionale Programmierung
-  WiSe 2014, Uni Hamburg
-  
-  Gruppe 11, Do. 18:15
-  Aufgabenblatt 11
-  
-  Eingereicht von
-    Timon Back (3back)
-    Fabian Behrendt (3behrend)
-    Nicolai Stäger (3staeger)
-
-  Beispielaufrufe befinden sich immer am Ende der Aufgabe
-  und können einfach auskommentiert werden.
-|#
-
-
-
-; ##############################################################################
-; ## Aufgabe 1.1 ###############################################################
-; ##############################################################################
-
-#|
-
-(gebaeude ?Haus weiss)
-(gebaeude Informatikum ?Farbe)
--> ((?Farbe . weiss) (?Haus . Informatikum))
-
-(Karten ((k Pik As) (k Herz Dame)))
-(Karten ((k Pik As) (k Herz Koenig)))
--> Keine Unifikation, da keine Variablen
-;KOMMENTAR: Keine Unifikation, da nicht unifizierbar. Nix Variablen.
-
-(Karten ((k Pik As) (k Herz Dame)))
-(Karten ((k Pik As) (k Herz ?Farbe)))
--> Keine Unifikation, da die Namen der Prädikate nicht stimmen
-   (hier müsste nach Wert oder so gefragt werden)
-;KOMMENTAR: Die Variable ?Farbe wird an Dame gebunden!
-;KOMMENTAR: Damit ist es unifizierbar.
-
-(Karten ((k Pik As) (k Herz Dame)))
-(Karten ((k Pik As) (k Herz ?Farbe)))
--> Keine Unifikation, da die Namen der Prädikate nicht stimmen
-   (hier müsste nach ?wert oder so gefragt werden)
-;KOMMENTAR: Siehe Kommentar darüber
-
-(Karten ((k Pik As) . ?andere))
-(Karten ((k Pik As) (k Herz Koenig) (k Kreuz Dame))
--> Keine Unifikation, da Stelligkeit nicht stimmt
-;KOMMENTAR: ?andere = '((k Herz Koenig) (k Kreuz Dame))
-
-(Paar (k ?farbe As ) (k Pik ?wert))
-(Paar (k Pik ?wert) (k ?farbe As))
--> ((?farbe . Pik) (?wert . As))
-
-(Paar (k ?farbe As ) (k Pik ?wert2))
-(Paar (k Pik ?wert) (k ?farbe ?wert))
--> ((?wert . As) (?wert2 . ?wert) (?farbe . Pik))
-;KOMMENTAR: ?farbe = Pik, ?wert = As, ?wert2 = As
-;KOMMENTAR: Man kann eine Variable nicht an eine Variable binden.
-;KOMMENTAR: Eine Variable hat schließlich keinen Wert.
-;KOMMENTAR: Was hier passiert nennt sich Koreferenzierung
-
-|#
-
-
-
-; ##############################################################################
-; ## Aufgabe 1.2 ###############################################################
-; ##############################################################################
-
-;KOMMENTAR: Sieht gut aus
+#lang lazy
 
 (require (lib "prologInScheme.ss" "se3-bib" "prolog"))
 
-; ( ausleihe Signatur Lesernummer )
-(<- ( ausleihe "K 110" 100 ) )
-(<- ( ausleihe "P 30" 102 ) )
-(<- ( ausleihe "P 32" 104 ) )
-(<- ( ausleihe "P 50" 104 ) )
-; ( vorbestellung Signatur Lesernummer )
-(<- ( vorbestellung "K 110" 104 ) )
-(<- ( vorbestellung "K 110" 102 ) )
-(<- ( vorbestellung "P 30" 100 ) )
-(<- ( vorbestellung "P 30" 104 ) )
-; ( leser Name Vorname Lesernummer Geburtsjahr )
-(<- ( leser Neugierig Nena 100 1989 ) )
-(<- ( leser Linux Leo 102 1990 ) )
-(<- ( leser Luator Eva 104 1988 ) )
 
-; 1 Ist das Buch mit der Signatur K 110 ausgeliehen?
-; (?- (ausleihe "K 110" ?leser))
-
-; 2 Welche Lesernummer hat Leo Linux?
-; (?- (leser Linux Leo ?lesernummer ?))
-
-; 3 Welcher Leser (identifiziert durch Name und Vorname) hat das Buch mit der Signatur P 30 vorbestellt?
-; (?- (vorbestellung "P 30" ?lesernummer)
-;     (leser ?name ?vorname ?lesernummer ?))
-
-; 4 Welche Leser (identifiziert durch Namen und Vornamen), die älter als 60 Jahre sind, haben ein Buch ausgeliehen?
-; (?- (ausleihe ? ?lesernummer)
-;     (leser ?name ?vorname ?lesernummer ?jahr)
-;     (test (> (- 2015 60) ?jahr)))
-
-; 5 Welche Leser haben mehr als ein Buch ausgeliehen?
-; (?- (leser ?name ?vorname ?lesernummer ?)
-;     (ausleihe ?buch1 ?lesernummer)
-;     (ausleihe ?buch2 ?lesernummer)
-;     (!= ?buch1 ?buch2)
-;     (test (string<? ?buch1 ?buch2)))
+;Aufgabe 1.2 
 
 
-; ##############################################################################
-; ## Aufgabe 2 #################################################################
-; ##############################################################################
+; ( schueler name ID lieblingsfach )
+(<- ( schueler "Max" 0 4 ) )
+(<- ( schueler "Laura" 1 2 ) )
+(<- ( schueler "Timo" 2 0 ) )
+(<- ( schueler "Gustav" 3 0 ) )
+(<- ( schueler "Marie" 4 1 ) )
+; ( note schuelerID fach note )
+(<- ( note 1 4 2 ) )
+(<- ( note 2 0 1 ) )
+(<- ( note 4 3 4 ) )
+(<- ( note 3 4 2 ) )
+(<- ( note 4 1 1 ) )
+; ( fach  ID Fach  )
+(<- ( fach 0 "Mathe" ) )
+(<- ( fach 1 "Deutsch" ) )
+(<- ( fach 2 "Englisch" ) )
+(<- ( fach 3 "Physik" ) )
+(<- ( fach 4 "Chemie" ) )
 
-;KOMMENTAR: Sieht gut aus
+;1. Welche Schüler (Namen) haben eine 2 in Chemie?
+;(?- (fach ?fachID "Chemie") (note ?sID ?fachID 2) (schueler ?name ?sID ?))
+
+;2. Wie viele Schüler haben eine 2 in Chemie?
+;(?- (fach ?fachID "Chemie") (findall ?SID (note ?SID ?fachID 2) ?X) (length ?X ?Anzahl))
+
+;3. Welche Schüler (Namen) haben dasselbe Lieblingsfach?
+;(?- (schueler ?Name ? ?Fach) (schueler ?Name2 ? ?Fach) (not = ?Name ?Name2))
+
+;4. Welche Schüler haben in irgendeinem Fach eine Note schlechter 3?
+;(?- (note ?SID ? ?Note) (not = ?Note 3) (not = ?Note 2) (not = ?Note 1) (schueler ?Name ?SID ?))
+
+
+
+; Aufgabe 2
 
 ; Stream der natürlichen Zahlen (wichtig: Lazy Racket benutzen, sonst entsteht hier
 ; endlos Schleife (Rekursive Listendefinition)
@@ -125,18 +47,18 @@
   (cons n (natsAbN (+ 1 n)))
   )
 
-; Stream, der alle Siebenen und durch sieben teilbare Zahlen durch 'sum' ersetzt
+; Stream, der alle durch 3 bzw. durch 5 teilbaren Zahlen durch flip bzw. flap ersetzt
 (define (flipStream stream)
   (let
       (
        ; Das aktuelle Element überprüpfen
        [currentElement 
         (cond
-          ; Ist es durch Sieben teilbar, dann 'sum'
+          ; Ist es durch 3 teilbar, dann 'flip'
           [(= (remainder (car stream) 3) 0) "flip"]
-          ; Enthält es eine Sieben, dann 'sum'
+          ; Ist es durch 3 teilbar, dann 'flap'
           [(= (remainder (car stream) 5) 0) "flap"]
-          ; Sonst, das ganz normale aktuelle Element
+          ; Sonst normal das aktuelle Element ausgeben
           [else (car stream)]
           )
         ]
@@ -147,15 +69,8 @@
   )
 ; Den Stream definieren
 (define flipflap (flipStream (natsAbN 1)))
-(take 40 flipflap)
+(!! (take 40 flipflap))
 
-
-
-; ##############################################################################
-; ## Aufgabe 3 #################################################################
-; ##############################################################################
-
-;KOMMENTAR: Alles gut
 
 ; Implementation
 (define (harm n)
@@ -200,9 +115,8 @@
     )
   )
 
-; Taken from the slides
 (define memo-harm (memori harm))
 (set! harm (memori harm))
 
-; Is working, but not very performant
+
 (memo-harm 30)
