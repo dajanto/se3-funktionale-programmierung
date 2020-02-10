@@ -2,7 +2,7 @@
 
 ; Probeklausur
 
-; 1.
+; 1.1
 
 ; a)
 ; Ein normaler arithmetischer Ausdruck in Präfix-Notation.
@@ -26,4 +26,35 @@
 ; sondern es kommt ein Ergebnis heraus. Ergebnis ist false, da (< 6 2) nicht wahr ist.
 
 ; g)
+; (foldl cons '() '(1 2 6 0 1))
+; Result bei foldl: '(1 0 6 2 1)
+; Result bei foldr: '(1 2 6 0 1)
+; Liste mit cons aufgebaut:(cons 1 (cons 2 (cons 3 (cons 4 '()))))
+; foldl funktioniert ca. wie map mit dem Unterschied, dass bei foldl der Wert gemäß der Procedure weiterverwendet wird.
+; In diesem Fall wird mit cons eine Liste gebaut (Letztes Element ist die leere Liste).
 
+; 1.2
+; a)
+; b)
+; c)
+
+
+; 1.3
+
+; 1.4
+; a)
+; b)
+; c)
+
+; 1.5
+; a)
+; b)
+; c)
+; d)
+; e)
+; f)
+
+; 1.6
+; a)
+; b)
+; c)
