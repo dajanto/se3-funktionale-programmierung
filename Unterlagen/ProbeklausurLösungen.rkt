@@ -35,11 +35,59 @@
 
 ; 1.2
 ; a)
+; Innere Reduktion: Terme werden von innen nach außen reduziert
+; Äußere Reduktion: Terme werden von außen nach innen reduziert
+
+; Die äußere Reduktion ist unvorteilhaft, wenn ein Parameter mehrfach benötigt wird,
+; da er so mehrfach ausgewertet wird
+(define (hoch4 x) (* x x x x))
+; (Antwort auf die Aufgabe mit entsprechender Begründung)
+
+; Die innere Reduktion ist unvorteilhaft, wenn die Argumente gar nicht zur Berechnung
+; des Resultats benötigt werden
+(define (konstant x y z) 1337)
+
 ; b)
+
+; if und cond sind Special Form Expressions, da hier eine andere Reihenfolge der Auswertung passieren muss
+; um die passende Semantik zu gewährleisten. Es muss erst die Bedingung geprüft werden, dadurch wird ja erst
+; gewiss, welche Rumpfterme ausgeführt werden sollen. 
+
+; Zwei weitere Special Form Operators sind
+; - quote (verhindert das Auswerten)
+; - define
+
+
 ; c)
+; Zur Syntax von Racket
+(define *a* 10)
+(define *b* '*a*)
+(define (merke x) (lambda () x))
+;(define (test x)
+;  (let ((x (+ x *a*))))
+;  (+ x 2))
+
+;1. 10
+;2. '*a*
+;3. 20
+;4. #f
+;5. division by zero
+;6. procedure
+;7. 5
+;8. let bad syntax (vom Autor gewollt?)
 
 
 ; 1.3
+
+; Formen der Rekursion
+
+; Lineare Rekursion 
+; Endrekursion
+; Allgemein rekursiv
+; Direkt/Indirekt 
+; Baumartig
+; Geschachtelt
+
 
 ; 1.4
 ; a)
