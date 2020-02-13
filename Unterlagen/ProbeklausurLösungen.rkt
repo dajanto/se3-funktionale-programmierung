@@ -166,12 +166,54 @@
 
 
 ; 1.5
+
+(define testpaarliste '((1 . 3) (2 . 4) (3 . 5)))
+
 ; a)
+
+(define (xliste xss)
+  (map (curry car) xss)
+  )
+(xliste testpaarliste)
+
 ; b)
+
+(define (yliste xss)
+  (map (curry cdr) xss)
+  )
+(yliste testpaarliste)
+
 ; c)
+
+(define (xsumme xss)
+  (foldl + 0 (xliste xss))
+  )
+(xsumme testpaarliste)
+
 ; d)
+; TODO
+(define (x*y-summe xss)
+  xss
+ ; (if (empty? xss)
+ ;     '()
+ ;      (foldl * 1 )
+ ; )
+)
+
+(x*y-summe testpaarliste)
+
+
 ; e)
+(define (x**2-summe xss)
+  xss
+  )
+
+
 ; f)
+
+
+
+
 
 ; 1.6
 ; a)
