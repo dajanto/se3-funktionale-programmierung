@@ -1,5 +1,5 @@
 #lang racket
-
+(require racket/trace)
 ; Probeklausur
 
 ; 1.1
@@ -80,6 +80,29 @@
 ; 1.3
 
 ; Formen der Rekursion
+ 
+(define (alle-neune xs)
+  (cond ((null? xs) 0)
+        ((= 9 (car xs)) (+ 1 (alle-neune (cdr xs))))
+        (else (alle-neune (cdr xs)))))
+
+
+(define (alle-zehne xs wieviele)
+  (cond ((null? xs) wieviele)
+        ((= 10 (car xs))
+         (alle-zehne (cdr xs) (+ 1 wieviele)))
+        (else (alle-zehne (cdr xs) wieviele))))
+
+;(define (anzahl-atome xs)
+;  (cond ((null? xs) 0)
+;        ((atom? xs) 1)
+;        (else (+ (anzahl-atome (car xs))
+;                 (anzahl-atome (cdr xs))))))
+
+
+(trace alle-neune)
+(trace alle-zehne)
+;(trace anzahl-atome)
 
 ; Lineare Rekursion 
 ; Endrekursion
@@ -88,11 +111,59 @@
 ; Baumartig
 ; Geschachtelt
 
+; alle-neune
+
+; alle-zehne
+
+; anzahl-atome
+
+
 
 ; 1.4
+
 ; a)
+; Listen eignen sich gut für einen rekursiven Aufruf, da man mit Hilfe von cons, car und cdr
+; diese manipulieren kann.
+
 ; b)
+; Testliste gemäß Aufgabe
+(define testliste '((1 3 4) (Auto Bus) () (3 4 5 6)))
+
+; TODO Rekursionsart bestimmen und ggf. weitere Implementieren
+(define (laengen xss)
+  (if (empty? xss)
+      '()
+      (cons
+       (length (car xss))
+       (laengen (cdr xss))
+       )
+      )
+  )
+
+(trace laengen)
+
+; Linear-rekursive Implementation
+
+
+; Endrekursive Implementation
+
+; Implementation mittels Funktion höherer Ordnung
+(define (laengenHO xss)
+  (map (curry length) xss)
+  )
+         
 ; c)
+; Woran erkennt man eine endrekursive Funktion?
+; Das Ergebnis muss nicht mehr mit anderen Termen verknüpft werden und
+; oftmals wird ein Akkumulator verwendet, der die Zwischenergebnisse sammelt.
+
+; Extra:
+; Woran erkennt man eine linear-rekursive Funktion?
+; Eine Funktionsdefinition, die sich auf de rechten Seite der Gleichung in jeder
+; Fallunterscheidung selbst nur einmal verwendet.
+
+
+
 
 ; 1.5
 ; a)
