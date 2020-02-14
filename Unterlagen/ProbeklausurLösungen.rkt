@@ -191,28 +191,39 @@
 (xsumme testpaarliste)
 
 ; d)
-; TODO
+
+(define (x*y-summeH xss)
+  ; Summe fehlt noch
+  (if (empty? xss)
+      '()
+      (cons
+       (* (caar xss) (cdar xss))
+       (x*y-summe (cdr xss))))
+  )
+
+; TODO Funktion höherer Ordnung verwenden
 (define (x*y-summe xss)
-  xss
- ; (if (empty? xss)
- ;     '()
- ;      (foldl * 1 )
- ; )
-)
+
+  (map (lambda (x)
+         * (car x) x )
+       xss
+       ))
 
 (x*y-summe testpaarliste)
 
 
 ; e)
 (define (x**2-summe xss)
-  xss
+  (foldl + 0 
+         (map (lambda (x) (* x x))
+              (xliste xss)))
   )
 
+(x**2-summe testpaarliste)
 
 ; f)
 
-
-
+; Zusatzaufgabe
 
 
 ; 1.6
