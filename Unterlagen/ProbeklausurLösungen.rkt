@@ -26,12 +26,7 @@
 ; sondern es kommt ein Ergebnis heraus. Ergebnis ist false, da (< 6 2) nicht wahr ist.
 
 ; g)
-; (foldl cons '() '(1 2 6 0 1))
-; Result bei foldl: '(1 0 6 2 1)
-; Result bei foldr: '(1 2 6 0 1)
-; Liste mit cons aufgebaut:(cons 1 (cons 2 (cons 3 (cons 4 '()))))
-; foldl funktioniert ca. wie map mit dem Unterschied, dass bei foldl der Wert gemäß der Procedure weiterverwendet wird.
-; In diesem Fall wird mit cons eine Liste gebaut (Letztes Element ist die leere Liste).
+; Am Ende der foldl-Operation wird mit 0 multipliziert, das Ergebnis ist also 0.
 
 ; 1.2
 ; a)
@@ -188,7 +183,7 @@
 (define (xsumme xss)
   (foldl + 0 (xliste xss))
   )
-(xsumme testpaarliste)
+;(xsumme testpaarliste)
 
 ; d)
 
@@ -198,18 +193,16 @@
       '()
       (cons
        (* (caar xss) (cdar xss))
-       (x*y-summe (cdr xss))))
+       (x*y-summeH (cdr xss))))
   )
 
+;(x*y-summeH testpaarliste)
+
 ; TODO Funktion höherer Ordnung verwenden
-(define (x*y-summe xss)
+;(define (x*y-summe xss)
+  ;(foldl (lambda(x y) (* (car x) (car y)) 0 (xliste xss) (yliste xss))))
 
-  (map (lambda (x)
-         * (car x) x )
-       xss
-       ))
-
-(x*y-summe testpaarliste)
+;(x*y-summe testpaarliste)
 
 
 ; e)
@@ -219,7 +212,7 @@
               (xliste xss)))
   )
 
-(x**2-summe testpaarliste)
+;(x**2-summe testpaarliste)
 
 ; f)
 
