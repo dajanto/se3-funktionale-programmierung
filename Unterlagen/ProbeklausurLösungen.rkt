@@ -78,17 +78,17 @@
 
 ; Formen der Rekursion
  
-(define (alle-neune xs)
-  (cond ((null? xs) 0)
-        ((= 9 (car xs)) (+ 1 (alle-neune (cdr xs))))
-        (else (alle-neune (cdr xs)))))
+;(define (alle-neune xs)
+;  (cond ((null? xs) 0)
+;        ((= 9 (car xs)) (+ 1 (alle-neune (cdr xs))))
+;        (else (alle-neune (cdr xs)))))
 
 
-(define (alle-zehne xs wieviele)
-  (cond ((null? xs) wieviele)
-        ((= 10 (car xs))
-         (alle-zehne (cdr xs) (+ 1 wieviele)))
-        (else (alle-zehne (cdr xs) wieviele))))
+;(define (alle-zehne xs wieviele)
+;  (cond ((null? xs) wieviele)
+;       ((= 10 (car xs))
+;        (alle-zehne (cdr xs) (+ 1 wieviele)))
+;        (else (alle-zehne (cdr xs) wieviele))))
 
 ;(define (anzahl-atome xs)
 ;  (cond ((null? xs) 0)
@@ -98,21 +98,34 @@
 
 
 ; alle-neune
-;
+; Linear-rekursiv
 
 ; alle-zehne
-;
+; Linear-rekursiv
+; Endrekursiv
+
 ; anzahl-atome
-;
-
-
-
-; Lineare Rekursion 
-; Endrekursion
-; Allgemein rekursiv
-; Direkt/Indirekt 
 ; Baumartig
+
+
+; -> Rekursionsarten
+; Lineare Rekursion
+; Nur ein rekursiver Aufruf nach der Definition pro Variante
+
+; Endrekursion
+; Ergebnis muss nicht mehr mit anderen Termen verknüpft werden
+; Akkumulator meistens erforderlich
+
+; Allgemein rekursiv
+
+; Indirekt
+; Wechselseitiges rekursives Verwenden von Funktionen 
+
+; Baumartig
+; In einer Fallunterscheidung mehrfach ein rekursiver Aufruf
+
 ; Geschachtelt
+; Funktion selbst als rekursives Argument übergeben wird
 
 ; 1.4
 
