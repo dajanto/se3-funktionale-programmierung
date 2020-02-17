@@ -14,7 +14,7 @@
 ; car gibt den ersten Wert einer Liste zurück, Antwort ist also auto.
 
 ; d)
-; cdr gibt den Rest einer Liste zurück, schneidet also den Head ab und das Result ist demnach bus.
+; cdr gibt den Rest einer Liste zurück, schneidet also den Head ab und das Result ist demnach (bus).
 
 ; e)
 ; Es wird sqrt auf jedes Element der übergebenden Liste angewendet, Result ist also '(1 3 2 5)
@@ -44,13 +44,15 @@
 
 ; b)
 
-; if und cond sind Special Form Expressions, da hier eine andere Reihenfolge der Auswertung passieren muss
+; if und cond sind Special Form Operators, da hier eine andere Reihenfolge der Auswertung passieren muss
 ; um die passende Semantik zu gewährleisten. Es muss erst die Bedingung geprüft werden, dadurch wird ja erst
-; gewiss, welche Rumpfterme ausgeführt werden sollen. 
+; gewiss, welche Rumpfterme ausgeführt werden sollen. Special Form Operators leiten eine Special Form Expression ein. 
 
 ; Zwei weitere Special Form Operators sind
-; - quote (verhindert das Auswerten)
+; - quote
 ; - define
+; - if/cond
+; - set
 
 
 ; c)
@@ -63,7 +65,7 @@
 ;  (+ x 2))
 
 ;1. 10
-;2. '*a*
+;2. contract violation
 ;3. 20
 ;4. #f
 ;5. division by zero
@@ -95,9 +97,15 @@
 ;                 (anzahl-atome (cdr xs))))))
 
 
-(trace alle-neune)
-(trace alle-zehne)
-;(trace anzahl-atome)
+; alle-neune
+;
+
+; alle-zehne
+;
+; anzahl-atome
+;
+
+
 
 ; Lineare Rekursion 
 ; Endrekursion
@@ -105,14 +113,6 @@
 ; Direkt/Indirekt 
 ; Baumartig
 ; Geschachtelt
-
-; alle-neune
-
-; alle-zehne
-
-; anzahl-atome
-
-
 
 ; 1.4
 
