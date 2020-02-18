@@ -1,5 +1,6 @@
 #lang racket
 (require racket/trace)
+(require (lib "prologInScheme.ss" "se3-bib" "prolog"))
 ; Probeklausur
 
 ; 1.1
@@ -137,7 +138,7 @@
 ; Testliste gemäß Aufgabe
 (define testliste '((1 3 4) (Auto Bus) () (3 4 5 6)))
 
-; TODO Rekursionsart bestimmen und ggf. weitere Implementieren
+; Linear-rekursive Implementation
 (define (laengen xss)
   (if (empty? xss)
       '()
@@ -148,16 +149,23 @@
       )
   )
 
+(laengen testliste)
 (trace laengen)
 
-; Linear-rekursive Implementation
-
-
 ; Endrekursive Implementation
+; TODO
+;(define (laengeEnd xss akku)
+;    (if (empty? xss)
+;      '()
+;      (cons
+;       (length (car xss))
+;       (laengen (cdr xss))
+;       )
+;  ))
 
 ; Implementation mittels Funktion höherer Ordnung
 (define (laengenHO xss)
-  (map (curry length) xss)
+  (map length xss)
   )
          
 ; c)
@@ -180,14 +188,14 @@
 ; a)
 
 (define (xliste xss)
-  (map (curry car) xss)
+  (map car xss)
   )
 (xliste testpaarliste)
 
 ; b)
 
 (define (yliste xss)
-  (map (curry cdr) xss)
+  (map cdr xss)
   )
 (yliste testpaarliste)
 
@@ -211,11 +219,10 @@
 
 ;(x*y-summeH testpaarliste)
 
-; TODO Funktion höherer Ordnung verwenden
-;(define (x*y-summe xss)
-  ;(foldl (lambda(x y) (* (car x) (car y)) 0 (xliste xss) (yliste xss))))
+(define (x*y-summe xss)
+  (foldl + 0 (map (lambda(x) (* (car x) (car x))) xss)))
 
-;(x*y-summe testpaarliste)
+(x*y-summe testpaarliste)
 
 
 ; e)
@@ -236,3 +243,37 @@
 ; a)
 ; b)
 ; c)
+
+; 1.7
+;( wirkstoff Medikament Wirkstoff )
+( <- ( wirkstoff " Aspirin_Plus_C " Acetylsalicylsäure ))
+( <- ( wirkstoff " Aspirin_Plus_C " Vitamin_C ))
+( <- ( wirkstoff " Aspro " Acetylsalicylsäure ))
+( <- ( wirkstoff " Spalt " Acetylsalicylsäure ))
+( <- ( wirkstoff " Paracetamol-Ratiopharm " Paracetamol ))
+( <- ( wirkstoff " Talvosilen " Paracetamol ))
+( <- ( wirkstoff " Talvosilen " Codein ))
+( <- ( wirkstoff " Proviron " Mesterolon ))
+( <- ( wirkstoff " Andriol " Testetoronundecanoat ))
+;( indikation Wirkstoff Anwendung )
+( <- ( indikation Acetylsalicylsäure
+" Fiebersenkend " ))
+( <- ( indikation Acetylsalicylsäure
+" Schmerzmittel " ))
+( <- ( indikation Codein " Fiebersenkend " )) 
+( <- ( indikation Codein " Hustendaempfer " )) 
+( <- ( indikation Mesterolon " Hormonmangel " ))
+
+; a)
+;(?- (wirkstoff " Aspirin_Plus_C " ?Wirkstoff))
+
+; b)
+;(?- (indikation Acetylsalicylsäure ?X)
+;    (indikation ?Y ?X)
+;    (!= ?Y Acetylsalicylsäure))
+
+; c)
+;(?- (indikation ?X " Hustendaempfer ") (wirkstoff ?M ?X))
+
+; d)
+;(?- (wirkstoff ?M ?W1)(wirkstoff ?M ?W2) (!= ?W1 ?W2))
