@@ -61,9 +61,9 @@
 (define *a* 10)
 (define *b* '*a*)
 (define (merke x) (lambda () x))
-;(define (test x)
-;  (let ((x (+ x *a*))))
-;  (+ x 2))
+(define (test x)
+  (let ((x (+ x *a*)))
+  (+ x 2)))
 
 ;1. 10
 ;2. contract violation
@@ -72,7 +72,7 @@
 ;5. division by zero
 ;6. procedure
 ;7. 5
-;8. let bad syntax (vom Autor gewollt?)
+;8. 16
 
 
 ; 1.3
@@ -153,15 +153,11 @@
 (trace laengen)
 
 ; Endrekursive Implementation
-; TODO
-;(define (laengeEnd xss akku)
-;    (if (empty? xss)
-;      '()
-;      (cons
-;       (length (car xss))
-;       (laengen (cdr xss))
-;       )
-;  ))
+(define (laengeEnd xss akku)
+    (if (empty? xss)
+      (reverse akku)
+      (laengeEnd (cdr xss) (cons (length (car xss)) akku))
+  ))
 
 ; Implementation mittels Funktion höherer Ordnung
 (define (laengenHO xss)
@@ -179,8 +175,6 @@
 ; Fallunterscheidung selbst nur einmal verwendet.
 
 
-
-
 ; 1.5
 
 (define testpaarliste '((1 . 3) (2 . 4) (3 . 5)))
@@ -190,6 +184,7 @@
 (define (xliste xss)
   (map car xss)
   )
+
 (xliste testpaarliste)
 
 ; b)
@@ -197,6 +192,7 @@
 (define (yliste xss)
   (map cdr xss)
   )
+
 (yliste testpaarliste)
 
 ; c)
@@ -208,41 +204,36 @@
 
 ; d)
 
-(define (x*y-summeH xss)
-  ; Summe fehlt noch
-  (if (empty? xss)
-      '()
-      (cons
-       (* (caar xss) (cdar xss))
-       (x*y-summeH (cdr xss))))
-  )
-
-;(x*y-summeH testpaarliste)
-
 (define (x*y-summe xss)
-  (foldl + 0 (map (lambda(x) (* (car x) (car x))) xss)))
+  (foldl + 0 (map * (xliste xss) (yliste xss)))
+  )
 
 (x*y-summe testpaarliste)
 
 
 ; e)
+
 (define (x**2-summe xss)
   (foldl + 0 
          (map (lambda (x) (* x x))
               (xliste xss)))
   )
 
-;(x**2-summe testpaarliste)
+(x**2-summe testpaarliste)
 
 ; f)
 
-; Zusatzaufgabe
+; Zusatzaufgabe --> egal
 
 
 ; 1.6
+
 ; a)
+
 ; b)
+
 ; c)
+
 
 ; 1.7
 ;( wirkstoff Medikament Wirkstoff )
@@ -277,3 +268,11 @@
 
 ; d)
 ;(?- (wirkstoff ?M ?W1)(wirkstoff ?M ?W2) (!= ?W1 ?W2))
+
+; e)
+; is bindet die Werte funktionaler Ausdrück an eine Variable
+
+; Analog bei Racket: test
+
+; f)
+; Die Eigenschaft der Richtungsunabhängigkeit geht verloren, da Variablen gebunden sein müssen
